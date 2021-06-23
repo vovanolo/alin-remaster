@@ -1,6 +1,72 @@
 import Link from "next/link";
+import { useState } from "react";
+
+function MobileBavbar({ leftcss }) {
+  return (
+    <div
+      className="transition duration-500 fixed inset-0 z-20"
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
+    >
+      <div
+        className="fixed min-w-full z-30 pointer-events-none transition duration-500"
+        style={{ left: leftcss }}
+      >
+        <div className="w-9/12 lg:w-5/12 h-full bg-white pointer-events-auto">
+          <div className="w-full bg-gray-100 flex justify-between p-2 relative z-10">
+            <h1>
+              <Link href={"/"}>LOGO</Link>
+            </h1>
+            <button
+              className="border-2 border-gray-700 rounded-lg px-2 my-1 
+            hover:text-red-600 hover:border-red-600 focus:outline-none"
+            >
+              <span className="text-4xl leading-none">x</span>
+            </button>
+          </div>
+          <div className="w-full min-h-screen overflow-hidden p-2 pt-4">
+            <ul className="text-lg font-medium space-y-4">
+              <li className="mb-4 lg:mb-0">
+                <a href={"/procat"}>
+                  Прокат <span className="text-xs">▼</span>
+                </a>
+              </li>
+              <li className="mb-4 lg:mb-0">
+                <a href={"/transfers"}>Трансфери</a>
+              </li>
+              <li className="mb-4 lg:mb-0">
+                <a href={"/ufu"}>
+                  Услуги <span className="text-xs">▼</span>
+                </a>
+              </li>
+              <li className="mb-4 lg:mb-0">
+                <a href={"/about"}>
+                  О компании <span className="text-xs">▼</span>
+                </a>
+              </li>
+              <li className="mb-4 lg:mb-0">
+                <a href={"/news"}>Новости</a>
+              </li>
+              <li className="mb-4 lg:mb-0">
+                <Link href={"/contacts"}>Контакти</Link>
+              </li>
+            </ul>
+            <hr className="mt-5 mb-6" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function NavBar() {
+  const [sideBarToggle, setSideBarToggle] = useState(false);
+  const [leftcss, setleftcss] = useState("-100%");
+
+  const triggerToggle = () => {
+    setSideBarToggle(!sideBarToggle);
+    setleftcss("0");
+  };
+
   return (
     <nav className="text-gray-700">
       <div className="fixed top-0 inset-x-0 bg-gray-100 py-2 z-20">
@@ -48,7 +114,10 @@ export default function NavBar() {
             <div>
               RU <span className="text-xs">▼</span>
             </div>
-            <button className="flex lg:hidden hover:text-red-400 ml-5">
+            <button
+              onClick={triggerToggle}
+              className="flex lg:hidden hover:text-red-400 ml-5 focus:outline-none"
+            >
               <svg
                 width="30"
                 height="30"
@@ -85,6 +154,7 @@ export default function NavBar() {
             </button>
           </div>
         </div>
+        {!sideBarToggle ? null : <MobileBavbar leftcss={leftcss} />}
       </div>
     </nav>
   );
