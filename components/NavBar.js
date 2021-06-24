@@ -75,67 +75,71 @@ export default function NavBar() {
           </div>
           <div className="flex-1 hidden w-10/12 lg:flex lg:w-auto items-center justify-end text-lg font-normal">
             <ul className="flex space-x-6">
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <div class="dropdown inline-block relative">
-                  <button class="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
-                    <span class="mr-1">
-                      Прокат <span className="text-xs">▼</span>
-                    </span>
-                    <svg
-                      class="fill-current h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />{" "}
-                    </svg>
-                  </button>
-                  <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
-                    <li class="">
-                      <a
-                        class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
-                        href="#"
-                      >
-                        One
-                      </a>
+              <li className="mb-4 lg:mb-0 transition duration-300 hover-trigger">
+                <p className="hover:text-red-600 cursor-pointer">
+                  Прокат <span className="text-xs">▼</span>
+                </p>
+                <div className="pt-4 min-w-max lg:absolute hover-target">
+                  <ul className="border text-base bg-white px-4">
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
                     </li>
-                    <li class="">
-                      <a
-                        class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
-                        href="#"
-                      >
-                        Two
-                      </a>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
                     </li>
-                    <li class="">
-                      <a
-                        class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
-                        href="#"
-                      >
-                        Three is the magic number
-                      </a>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Івано-Франківськ
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
                     </li>
                   </ul>
                 </div>
-                <style jsx>
-                  {`
-                    .dropdown:hover .dropdown-menu {
-                      display: block;
-                    }
-                  `}
-                </style>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <a href={"/transfers"}>Трансфери</a>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/ufu"}>
+              <li className="mb-4 lg:mb-0 transition duration-300 hover-trigger">
+                <p className="hover:text-red-600 cursor-pointer">
                   Услуги <span className="text-xs">▼</span>
-                </a>
+                </p>
+                <div className="pt-4 min-w-max lg:absolute hover-target">
+                  <ul className="border text-base bg-white px-4">
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Івано-Франківськ
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/about"}>
+              <li className="mb-4 lg:mb-0 transition duration-300 hover-trigger">
+                <p className="hover:text-red-600 cursor-pointer">
                   О компании <span className="text-xs">▼</span>
-                </a>
+                </p>
+                <div className="pt-4 min-w-max lg:absolute hover-target">
+                  <ul className="border text-base bg-white px-4">
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Івано-Франківськ
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <a href={"/news"}>Новости</a>

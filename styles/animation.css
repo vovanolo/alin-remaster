@@ -1,3 +1,4 @@
+/* Text Animation HeroSection */
 .text {
   font: normal 40px/50px Montserrat, sans-serif;
   color: #999;
@@ -55,7 +56,7 @@
   }
 }
 
-@-webkit-keyframes move {
+/* @-webkit-keyframes move {
   0% {
     top: 0px;
   }
@@ -68,8 +69,11 @@
   60% {
     top: -150px;
   }
-}
-@-moz-keyframes move {
+  80% {
+    top: -200px;
+  }
+} */
+/* @-moz-keyframes move {
   0% {
     top: 0px;
   }
@@ -96,31 +100,25 @@
   60% {
     top: -150px;
   }
-}
-
-/* .animText1 {
-  width: 36ch;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 4px solid black;
-  animation: flashing-border 0.75s step-end infinite,
-    print-text 6.7s steps(36) infinite;
-}
-
-@keyframes flashing-border {
-  0% {
-    border-color: black;
-  }
-  50% {
-    border-color: transparent;
-  }
-  100% {
-    border-color: black;
-  }
-}
-
-@keyframes print-text {
-  from {
-    width: 0;
-  }
 } */
+
+/* Dropdown animation */
+.hover-trigger .hover-target {
+  display: none;
+}
+
+.hover-trigger:hover .hover-target {
+  display: block;
+  animation: drop-anim 0.4s linear;
+}
+
+@keyframes drop-anim {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
