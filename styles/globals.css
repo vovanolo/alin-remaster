@@ -16,3 +16,8 @@ footer {
   max-width: 1140px;
   width: 100%;
 }
+
+.removeDefaultIcon::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  cursor: pointer;
+}

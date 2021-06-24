@@ -1,56 +1,42 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function MobileBavbar({ leftcss }) {
+function MobileBavbar() {
   return (
-    <div
-      className="transition duration-500 fixed inset-0 z-20"
-      style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
-    >
-      <div
-        className="fixed min-w-full z-30 pointer-events-none transition duration-500"
-        style={{ left: leftcss }}
-      >
-        <div className="w-9/12 lg:w-5/12 h-full bg-white pointer-events-auto">
-          <div className="w-full bg-gray-100 flex justify-between p-2 relative z-10">
-            <h1>
-              <Link href={"/"}>LOGO</Link>
-            </h1>
-            <button
-              className="border-2 border-gray-700 rounded-lg px-2 my-1 
-            hover:text-red-600 hover:border-red-600 focus:outline-none"
-            >
-              <span className="text-4xl leading-none">x</span>
-            </button>
-          </div>
-          <div className="w-full min-h-screen overflow-hidden p-2 pt-4">
-            <ul className="text-lg font-medium space-y-4">
-              <li className="mb-4 lg:mb-0">
+    <div className="block lg:hidden menu-wrap">
+      <input type="checkbox" className="toggler" />
+      <div className="hamburger">
+        <div></div>
+      </div>
+      <div className="menu">
+        <div>
+          <div>
+            <ul className="text-white">
+              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <a href={"/procat"}>
                   Прокат <span className="text-xs">▼</span>
                 </a>
               </li>
-              <li className="mb-4 lg:mb-0">
+              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <a href={"/transfers"}>Трансфери</a>
               </li>
-              <li className="mb-4 lg:mb-0">
+              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <a href={"/ufu"}>
                   Услуги <span className="text-xs">▼</span>
                 </a>
               </li>
-              <li className="mb-4 lg:mb-0">
+              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <a href={"/about"}>
                   О компании <span className="text-xs">▼</span>
                 </a>
               </li>
-              <li className="mb-4 lg:mb-0">
+              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <a href={"/news"}>Новости</a>
               </li>
-              <li className="mb-4 lg:mb-0">
+              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <Link href={"/contacts"}>Контакти</Link>
               </li>
             </ul>
-            <hr className="mt-5 mb-6" />
           </div>
         </div>
       </div>
@@ -60,46 +46,101 @@ function MobileBavbar({ leftcss }) {
 
 export default function NavBar() {
   const [sideBarToggle, setSideBarToggle] = useState(false);
-  const [leftcss, setleftcss] = useState("-100%");
+  const [styleNavbar, setStyleNavbar] = useState("none");
+
+  useEffect(() => {
+    let url = window.location.href;
+    if (url !== "http://localhost:3000/") {
+      setStyleNavbar("rgb(243, 244, 246)");
+    } else {
+      setStyleNavbar("none");
+    }
+  }, []);
 
   const triggerToggle = () => {
     setSideBarToggle(!sideBarToggle);
-    setleftcss("0");
   };
 
   return (
     <nav className="text-gray-700">
-      <div className="fixed top-0 inset-x-0 bg-gray-100 py-2 z-20">
+      <div
+        className="fixed top-0 inset-x-0 py-2 z-20"
+        style={{ background: styleNavbar }}
+      >
         <div className="container-main mx-auto px-4 xl:px-0 flex justify-between">
           <div className="flex">
             <h1>
               <Link href={"/"}>LOGO</Link>
             </h1>
           </div>
-          <div className="flex-1 hidden w-10/12 lg:flex lg:w-auto items-center justify-end">
-            <ul className="text-lg font-medium flex space-x-6">
-              <li className="mb-4 lg:mb-0">
-                <a href={"/procat"}>
-                  Прокат <span className="text-xs">▼</span>
-                </a>
+          <div className="flex-1 hidden w-10/12 lg:flex lg:w-auto items-center justify-end text-lg font-normal">
+            <ul className="flex space-x-6">
+              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
+                <div class="dropdown inline-block relative">
+                  <button class="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
+                    <span class="mr-1">
+                      Прокат <span className="text-xs">▼</span>
+                    </span>
+                    <svg
+                      class="fill-current h-4 w-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />{" "}
+                    </svg>
+                  </button>
+                  <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
+                    <li class="">
+                      <a
+                        class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                        href="#"
+                      >
+                        One
+                      </a>
+                    </li>
+                    <li class="">
+                      <a
+                        class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                        href="#"
+                      >
+                        Two
+                      </a>
+                    </li>
+                    <li class="">
+                      <a
+                        class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
+                        href="#"
+                      >
+                        Three is the magic number
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <style jsx>
+                  {`
+                    .dropdown:hover .dropdown-menu {
+                      display: block;
+                    }
+                  `}
+                </style>
               </li>
-              <li className="mb-4 lg:mb-0">
+              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <a href={"/transfers"}>Трансфери</a>
               </li>
-              <li className="mb-4 lg:mb-0">
+              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <a href={"/ufu"}>
                   Услуги <span className="text-xs">▼</span>
                 </a>
               </li>
-              <li className="mb-4 lg:mb-0">
+              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <a href={"/about"}>
                   О компании <span className="text-xs">▼</span>
                 </a>
               </li>
-              <li className="mb-4 lg:mb-0">
+              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <a href={"/news"}>Новости</a>
               </li>
-              <li className="mb-4 lg:mb-0">
+              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <Link href={"/contacts"}>Контакти</Link>
               </li>
             </ul>
@@ -154,7 +195,7 @@ export default function NavBar() {
             </button>
           </div>
         </div>
-        {!sideBarToggle ? null : <MobileBavbar leftcss={leftcss} />}
+        <MobileBavbar />
       </div>
     </nav>
   );
