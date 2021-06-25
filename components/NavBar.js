@@ -11,26 +11,74 @@ function MobileBavbar() {
       <div className="menu">
         <div>
           <div>
-            <ul className="text-white">
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/procat"}>
+            <ul className="flex-col">
+              <li className="mb-4 lg:mb-0 hover-trigger transition duration-300">
+                <p className="text-white hover:text-red-600 cursor-pointer">
                   Прокат <span className="text-xs">▼</span>
-                </a>
+                </p>
+                <div className="pt-4 min-w-max lg:absolute hover-target">
+                  <ul className="border-2 text-base bg-white px-4">
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Івано-Франківськ
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
+              <li className="mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
                 <a href={"/transfers"}>Трансфери</a>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/ufu"}>
+              <li className="mb-4 lg:mb-0 hover-trigger transition duration-300">
+                <p className="text-white hover:text-red-600 cursor-pointer">
                   Услуги <span className="text-xs">▼</span>
-                </a>
+                </p>
+                <div className="pt-4 min-w-max lg:absolute hover-target">
+                  <ul className="border-2 text-base bg-white px-4">
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Івано-Франківськ
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/about"}>
+              <li className="mb-4 lg:mb-0 hover-trigger transition duration-300">
+                <p className="text-white hover:text-red-600 cursor-pointer">
                   О компании <span className="text-xs">▼</span>
-                </a>
+                </p>
+                <div className="pt-4 min-w-max lg:absolute hover-target">
+                  <ul className="border-2 text-base bg-white px-4">
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Івано-Франківськ
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      ghfghf
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
+              <li className="mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
                 <a href={"/news"}>Новости</a>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
@@ -152,17 +200,37 @@ export default function NavBar() {
           <div className="flex items-center">
             <button
               className="bg-red-600 text-white text-sm md:text-base rounded-lg px-4 md:px-10 py-2.5 mx-5 
-          hover:bg-red-500 focus:outline-none"
+              hover:bg-red-500 focus:outline-none"
             >
               Связь
             </button>
             <div>
-              RU <span className="text-xs">▼</span>
+              <button
+                onClick={triggerToggle}
+                className="transition duration-500 ease-in-out  uppercase w-12 hover:text-red-600 focus:outline-none"
+              >
+                RU <span className="text-xs">▼</span>
+              </button>
+              {sideBarToggle ? (
+                <div className="absolute right-4 sm:right-4 md:right-2 lg:right-36 mt-4 transition duration-500 ease-in-out z-10">
+                  <ul className="border text-base bg-white px-4">
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Українська
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Русский
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      English
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Poland
+                    </li>
+                  </ul>
+                </div>
+              ) : null}
             </div>
-            <button
-              onClick={triggerToggle}
-              className="flex lg:hidden hover:text-red-400 ml-5 focus:outline-none"
-            >
+            <button className="flex lg:hidden hover:text-red-400 ml-5 focus:outline-none">
               <svg
                 width="30"
                 height="30"
