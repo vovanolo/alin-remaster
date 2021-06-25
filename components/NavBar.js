@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function MobileBavbar() {
   return (
@@ -19,16 +19,16 @@ function MobileBavbar() {
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border-2 text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Прокат авто Львів
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Прокат авто Харків
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Прокат авто Івано-Франківськ
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Прокат авто Київ
                     </li>
                   </ul>
                 </div>
@@ -43,16 +43,13 @@ function MobileBavbar() {
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border-2 text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Асистенс
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Дополнительные услуги
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Прокат авто Івано-Франківськ
-                    </li>
-                    <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Автовикуп
                     </li>
                   </ul>
                 </div>
@@ -64,22 +61,21 @@ function MobileBavbar() {
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border-2 text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Программа лояльности
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Faq
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Прокат авто Івано-Франківськ
-                    </li>
-                    <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      О нас
                     </li>
                   </ul>
                 </div>
               </li>
               <li className="mb-0 md:mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
-                <a href={"/news"}>Новости</a>
+                <Link href={"/news"}>
+                  <a>Новости</a>
+                </Link>
               </li>
               <li className="mb-0 md:mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
                 <Link href={"/contacts"}>Контакти</Link>
@@ -112,7 +108,7 @@ export default function NavBar() {
   return (
     <nav className="text-gray-700">
       <div
-        className="fixed top-0 inset-x-0 py-2 z-20"
+        className="fixed top-0 navbar-color active inset-x-0 py-2 z-20"
         style={{ background: styleNavbar }}
       >
         <div className="container-main mx-auto px-4 xl:px-0 flex justify-between">
@@ -130,16 +126,16 @@ export default function NavBar() {
                 <div className="pt-4 min-w-max lg:absolute hover-target">
                   <ul className="border text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Прокат авто Львів
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Прокат авто Харків
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Прокат авто Івано-Франківськ
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Прокат авто Київ
                     </li>
                   </ul>
                 </div>
@@ -154,16 +150,13 @@ export default function NavBar() {
                 <div className="pt-4 min-w-max lg:absolute hover-target">
                   <ul className="border text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Асистенс
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Дополнительные услуги
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Прокат авто Івано-Франківськ
-                    </li>
-                    <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Автовикуп
                     </li>
                   </ul>
                 </div>
@@ -175,22 +168,21 @@ export default function NavBar() {
                 <div className="pt-4 min-w-max lg:absolute hover-target">
                   <ul className="border text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Программа лояльности
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      Faq
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Прокат авто Івано-Франківськ
-                    </li>
-                    <li className="hover:text-red-600 cursor-pointer my-2">
-                      ghfghf
+                      О нас
                     </li>
                   </ul>
                 </div>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/news"}>Новости</a>
+                <Link href={"/news"}>
+                  <a>Новости</a>
+                </Link>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
                 <Link href={"/contacts"}>Контакти</Link>

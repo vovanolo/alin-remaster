@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import newsCar from "../../../images/thumb__350_180_0_0_crop.jpg";
+import newsCar from "../images/thumb__350_180_0_0_crop.jpg";
 
 export default function NewsSection() {
   return (
