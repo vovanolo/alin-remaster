@@ -12,11 +12,11 @@ function MobileBavbar() {
         <div>
           <div>
             <ul className="flex-col">
-              <li className="mb-4 lg:mb-0 hover-trigger transition duration-300">
+              <li className="mb-0 md:mb-4 lg:mb-0 hover-trigger transition duration-300">
                 <p className="text-white hover:text-red-600 cursor-pointer">
                   Прокат <span className="text-xs">▼</span>
                 </p>
-                <div className="pt-4 min-w-max lg:absolute hover-target">
+                <div className="min-w-max lg:absolute hover-target">
                   <ul className="border-2 text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       ghfghf
@@ -33,14 +33,14 @@ function MobileBavbar() {
                   </ul>
                 </div>
               </li>
-              <li className="mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
+              <li className="mb-0 md:mb-4  lg:mb-0 text-white hover:text-red-600 transition duration-300">
                 <a href={"/transfers"}>Трансфери</a>
               </li>
-              <li className="mb-4 lg:mb-0 hover-trigger transition duration-300">
+              <li className="mb-0 md:mb-4  lg:mb-0 hover-trigger transition duration-300">
                 <p className="text-white hover:text-red-600 cursor-pointer">
                   Услуги <span className="text-xs">▼</span>
                 </p>
-                <div className="pt-4 min-w-max lg:absolute hover-target">
+                <div className="min-w-max lg:absolute hover-target">
                   <ul className="border-2 text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       ghfghf
@@ -57,11 +57,11 @@ function MobileBavbar() {
                   </ul>
                 </div>
               </li>
-              <li className="mb-4 lg:mb-0 hover-trigger transition duration-300">
+              <li className="mb-0 md:mb-4  lg:mb-0 hover-trigger transition duration-300">
                 <p className="text-white hover:text-red-600 cursor-pointer">
                   О компании <span className="text-xs">▼</span>
                 </p>
-                <div className="pt-4 min-w-max lg:absolute hover-target">
+                <div className="min-w-max lg:absolute hover-target">
                   <ul className="border-2 text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       ghfghf
@@ -78,10 +78,10 @@ function MobileBavbar() {
                   </ul>
                 </div>
               </li>
-              <li className="mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
+              <li className="mb-0 md:mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
                 <a href={"/news"}>Новости</a>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
+              <li className="mb-0 md:mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
                 <Link href={"/contacts"}>Контакти</Link>
               </li>
             </ul>
@@ -105,7 +105,7 @@ export default function NavBar() {
     }
   }, []);
 
-  const triggerToggle = () => {
+  const triggerToggle = (event) => {
     setSideBarToggle(!sideBarToggle);
   };
 
@@ -122,7 +122,7 @@ export default function NavBar() {
             </h1>
           </div>
           <div className="flex-1 hidden w-10/12 lg:flex lg:w-auto items-center justify-end text-lg font-normal">
-            <ul className="flex space-x-6">
+            <ul className="relative w-10/12 lg:w-auto text-lg font-medium lg:flex space-x-6 mr-5">
               <li className="mb-4 lg:mb-0 transition duration-300 hover-trigger">
                 <p className="hover:text-red-600 cursor-pointer">
                   Прокат <span className="text-xs">▼</span>
@@ -204,7 +204,7 @@ export default function NavBar() {
             >
               Связь
             </button>
-            <div>
+            <div className="relative">
               <button
                 onClick={triggerToggle}
                 className="transition duration-500 ease-in-out  uppercase w-12 hover:text-red-600 focus:outline-none"
@@ -212,7 +212,7 @@ export default function NavBar() {
                 RU <span className="text-xs">▼</span>
               </button>
               {sideBarToggle ? (
-                <div className="absolute right-4 sm:right-4 md:right-2 lg:right-36 mt-4 transition duration-500 ease-in-out z-10">
+                <div className="absolute right-0 mt-4 transition duration-500 ease-in-out z-10">
                   <ul className="border text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Українська

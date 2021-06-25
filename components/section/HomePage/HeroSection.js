@@ -9,10 +9,20 @@ export default function HeroSection() {
     <section className="relative flex items-center -mt-24 min-h-screen overflow-hidden">
       <div className="absolute inset-y-0 lg:-right-16 w-full lg:w-1/2 flex items-center pointer-events-none">
         <div className="absolute top-1/2 lg:left-full transform -translate-y-1/2 lg:-translate-x-2/3 w-full opacity-20 object-contain z-0">
-          <Image className="w-full" src={windrose} alt="Car" />
+          <Image
+            className="w-full"
+            src={windrose}
+            alt="Car"
+            layout="responsive"
+          />
         </div>
         <div className="hidden lg:block relative w-full pl-20 z-10">
-          <Image className="w-full" src={mainImage} alt="windrose" />
+          <Image
+            className="w-full"
+            src={mainImage}
+            alt="windrose"
+            layout="responsive"
+          />
         </div>
       </div>
       <div className="container-main mx-auto px-4 xl:px-0 relative z-10">
