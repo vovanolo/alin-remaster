@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function MobileBavbar() {
   return (
@@ -89,8 +89,9 @@ function MobileBavbar() {
 }
 
 export default function NavBar() {
-  const [sideBarToggle, setSideBarToggle] = useState(false);
-  const [styleNavbar, setStyleNavbar] = useState("none");
+  const [styleNavbar, setStyleNavbar] = useState("none"); // Стейт для зміни кольору навбару
+  const container = useRef(); // Реф для перевірки hendleOutSide click dropdown
+  const [dropdownLang, setDropdownLang] = useState(false); // Open and Close Dropdown Navnar Lang
 
   useEffect(() => {
     let url = window.location.href;
@@ -98,17 +99,35 @@ export default function NavBar() {
       setStyleNavbar("rgb(243, 244, 246)");
     } else {
       setStyleNavbar("none");
+      document.addEventListener("scroll", function () {
+        if (window.scrollY >= 80) {
+          setStyleNavbar("rgb(243, 244, 246)");
+        } else {
+          setStyleNavbar("none");
+        }
+      });
     }
   }, []);
 
-  const triggerToggle = (event) => {
-    setSideBarToggle(!sideBarToggle);
+  const triggerToggle = () => {
+    setDropdownLang(!dropdownLang);
   };
+
+  // Закриваємо dropdown якщо не на жали на нього
+  const handleClickOutside = (event) => {
+    if (container.current && !container.current.contains(event.target)) {
+      setDropdownLang(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+  });
 
   return (
     <nav className="text-gray-700">
       <div
-        className="fixed top-0 navbar-color active inset-x-0 py-2 z-20"
+        className="fixed top-0 navbar-color active inset-x-0 py-2 z-20 transtion duration-700"
         style={{ background: styleNavbar }}
       >
         <div className="container-main mx-auto px-4 xl:px-0 flex justify-between">
@@ -123,7 +142,7 @@ export default function NavBar() {
                 <p className="hover:text-red-600 cursor-pointer">
                   Прокат <span className="text-xs">▼</span>
                 </p>
-                <div className="pt-4 min-w-max lg:absolute hover-target">
+                <div className="min-w-max lg:absolute hover-target">
                   <ul className="border text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Прокат авто Львів
@@ -147,7 +166,7 @@ export default function NavBar() {
                 <p className="hover:text-red-600 cursor-pointer">
                   Услуги <span className="text-xs">▼</span>
                 </p>
-                <div className="pt-4 min-w-max lg:absolute hover-target">
+                <div className="min-w-max lg:absolute hover-target">
                   <ul className="border text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Асистенс
@@ -165,7 +184,7 @@ export default function NavBar() {
                 <p className="hover:text-red-600 cursor-pointer">
                   О компании <span className="text-xs">▼</span>
                 </p>
-                <div className="pt-4 min-w-max lg:absolute hover-target">
+                <div className="min-w-max lg:absolute hover-target">
                   <ul className="border text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Программа лояльности
@@ -196,15 +215,15 @@ export default function NavBar() {
             >
               Связь
             </button>
-            <div className="relative">
+            <div className="relative transition deley-300" ref={container}>
               <button
                 onClick={triggerToggle}
-                className="transition duration-500 ease-in-out  uppercase w-12 hover:text-red-600 focus:outline-none"
+                className="uppercase w-12 hover:text-red-600 focus:outline-none"
               >
                 RU <span className="text-xs">▼</span>
               </button>
-              {sideBarToggle ? (
-                <div className="absolute right-0 mt-4 transition duration-500 ease-in-out z-10">
+              {dropdownLang ? (
+                <div className="absolute right-0 mt-4 z-10">
                   <ul className="border text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Українська
