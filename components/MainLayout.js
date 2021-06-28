@@ -1,7 +1,7 @@
 import Head from "next/head";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
-import Link from "next/link";
+import Callback from "./Callback";
 
 export function MainLayout({ children, title }) {
   return (
@@ -16,6 +16,8 @@ export function MainLayout({ children, title }) {
       <NavBar />
 
       <main className="text-gray-700 mt-24">{children}</main>
+
+      <Callback />
 
       <Footer />
     </div>

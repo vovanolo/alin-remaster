@@ -1,0 +1,105 @@
+.mp-social {
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+  height: 56px;
+}
+
+.mp-social-active {
+  height: 256px;
+  animation: fold4 2s linear;
+}
+
+.mp_social_1 {
+  animation: mp-social 2s linear;
+}
+
+@keyframes fold4 {
+  from {
+    height: 56px;
+  }
+  10% {
+    height: 56px;
+  }
+  10.01% {
+    height: 56px;
+  }
+  20% {
+    height: 100px;
+  }
+  20.01% {
+    height: 100px;
+  }
+  40% {
+    height: 150px;
+  }
+  40.01% {
+    height: 150px;
+  }
+  60% {
+    height: 200px;
+  }
+  60.01% {
+    height: 200px;
+  }
+  80% {
+    height: 243px;
+  }
+  80.01% {
+    height: 243px;
+  }
+  to {
+    height: 256px;
+  }
+}
+
+.cb-phone-cls-1 {
+  fill: rgb(220, 38, 38);
+}
+
+.cb-phone-cls-2 {
+  fill: #f3f3f3;
+}
+
+.cb-close-cls-1 {
+  fill: #f3f3f3;
+}
+
+.cb-close-cls-2 {
+  fill: none;
+  stroke: #44464d;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 21.49px;
+}
+
+.cb-whatsapp-cls-1 {
+  fill: #f3f3f3;
+}
+
+.cb-whatsapp-cls-2 {
+  fill: #55cd6c;
+}
+
+.cb-telegram-cls-1 {
+  fill: #f3f3f3;
+}
+
+.cb-telegram-cls-2 {
+  fill: #36aee2;
+}
+
+.cb-phoneSocial-cls-1 {
+  fill: #f3f3f3;
+}
+
+.cb-phoneSocial-cls-2 {
+  fill: #44464d;
+}
+
+.cb-viber-cls-1 {
+  fill: #f3f3f3;
+}
+
+.cb-viber-cls-2 {
+  fill: #834995;
+}
