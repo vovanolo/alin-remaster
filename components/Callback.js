@@ -202,7 +202,7 @@ export default function Callback() {
           </svg>
         ) : (
           <svg
-            className="cb-close"
+            className="cb-close icon-close"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 545 535"
           >
