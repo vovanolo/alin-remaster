@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 
 export default function Callback() {
   const [dropdownOnClose, setDropdownOnClose] = useState(false);
@@ -34,7 +33,11 @@ export default function Callback() {
       {dropdownOnClose ? (
         <div>
           <div className="mp_social_1 mb-2.5">
-            <a>
+            <a
+              href="https://wa.me/+380987771600"
+              rel="nofollow"
+              target="_blank"
+            >
               <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                 <title>icon</title>
                 <ellipse
@@ -56,7 +59,11 @@ export default function Callback() {
             </a>
           </div>
           <div className="mp_social_2 mb-2.5">
-            <a>
+            <a
+              href="viber://chat?number=%2B380987771600"
+              rel="nofollow"
+              target="_blank"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 545 535">
                 <title>icon</title>
                 <g id="page2">
@@ -92,7 +99,11 @@ export default function Callback() {
             </a>
           </div>
           <div className="mp_social_3 mb-2.5">
-            <a>
+            <a
+              href="https://t.me/alin_services_for_you"
+              rel="nofollow"
+              target="_blank"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 545 535">
                 <title>icon</title>
                 <g id="page2">
@@ -112,7 +123,7 @@ export default function Callback() {
             </a>
           </div>
           <div className="mp_social_4 mb-2.5">
-            <a>
+            <a href="tel:+380987771600" rel="nofollow" target="_blank">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 660.25 648.81"

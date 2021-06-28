@@ -1,5 +1,6 @@
+import { useEffect, useRef, useState } from "react";
+import CallbackForm from "./CallbackForm";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
 
 function MobileBavbar() {
   return (
@@ -92,6 +93,7 @@ export default function NavBar() {
   const [styleNavbar, setStyleNavbar] = useState("none"); // Стейт для зміни кольору навбару
   const container = useRef(); // Реф для перевірки hendleOutSide click dropdown
   const [dropdownLang, setDropdownLang] = useState(false); // Open and Close Dropdown Navnar Lang
+  const [callBackFormOnClose, setCallBackFormOnClose] = useState(false); // Callback form On or Close
 
   useEffect(() => {
     let url = window.location.href;
@@ -111,6 +113,10 @@ export default function NavBar() {
 
   const triggerToggle = () => {
     setDropdownLang(!dropdownLang);
+  };
+
+  const triggerToggleForm = () => {
+    setCallBackFormOnClose(!callBackFormOnClose);
   };
 
   // Закриваємо dropdown якщо не на жали на нього
@@ -210,6 +216,7 @@ export default function NavBar() {
           </div>
           <div className="flex items-center">
             <button
+              onClick={triggerToggleForm}
               className="bg-red-600 text-white text-sm md:text-base rounded-lg px-4 md:px-10 py-2.5 mx-5 
               hover:bg-red-500 focus:outline-none"
             >
@@ -279,6 +286,9 @@ export default function NavBar() {
           </div>
         </div>
         <MobileBavbar />
+        {callBackFormOnClose ? (
+          <CallbackForm triggerToggleForm={triggerToggleForm} />
+        ) : null}
       </div>
     </nav>
   );

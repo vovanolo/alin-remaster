@@ -117,3 +117,56 @@
   transform: scale(1);
   padding-top: 1rem;
 }
+
+/* HeroSection Select Animation */
+
+/* CALLLBACKFORM is Collapse Animation */
+.container-form {
+  animation: form-CollpaseAnimation 0.8s linear;
+}
+
+.form-anim {
+  animation: form-opacity 2.4s linear;
+}
+
+@keyframes form-CollpaseAnimation {
+  from {
+    transform: scale(0);
+  }
+  20.01% {
+    transform: scale(0.2);
+  }
+  40% {
+    transform: scale(0.4);
+  }
+  60% {
+    transform: scale(0.6);
+  }
+  80% {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes form-opacity {
+  from {
+    opacity: 0;
+  }
+  20.01% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0.25;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}

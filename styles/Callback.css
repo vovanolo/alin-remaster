@@ -1,12 +1,57 @@
+/* Test */
+.mp-close {
+  animation: mp-close-animation 2s linear;
+}
+
+@keyframes mp-close-animation {
+  from {
+    height: 200px;
+  }
+  10% {
+    height: 200px;
+  }
+  10.01% {
+    height: 200px;
+  }
+  20% {
+    height: 180px;
+  }
+  20.01% {
+    height: 180px;
+  }
+  40% {
+    height: 150px;
+  }
+  40.01% {
+    height: 150px;
+  }
+  60% {
+    height: 100px;
+  }
+  60.01% {
+    height: 100px;
+  }
+  80% {
+    height: 20px;
+  }
+  80.01% {
+    height: 0px;
+  }
+  to {
+    height: 0px;
+  }
+}
+/* Test */
+
 .mp-social {
   overflow: hidden;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.5s;
   height: 56px;
 }
 
 .mp-social-active {
   height: 256px;
-  animation: fold4 2s linear;
+  animation: collapse-animation 1s linear;
 }
 
 .mp_social_1 {
@@ -34,8 +79,17 @@
 
 .icon-close {
   opacity: 0;
-  animation: icon-close 2s infinite;
+  animation: icon-animation 2s infinite;
   animation-delay: 2s;
+}
+
+@keyframes icon-animation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes mp-social {
@@ -47,16 +101,7 @@
   }
 }
 
-@keyframes icon-close {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fold4 {
+@keyframes collapse-animation {
   from {
     height: 56px;
   }
@@ -64,7 +109,7 @@
     height: 56px;
   }
   10.01% {
-    height: 56px;
+    height: 65px;
   }
   20% {
     height: 100px;
@@ -79,16 +124,16 @@
     height: 150px;
   }
   60% {
-    height: 200px;
+    height: 180px;
   }
   60.01% {
-    height: 200px;
+    height: 184px;
   }
   80% {
-    height: 243px;
+    height: 224px;
   }
   80.01% {
-    height: 243px;
+    height: 238px;
   }
   to {
     height: 256px;
