@@ -231,7 +231,7 @@ export default function NavBar() {
               </button>
               {dropdownLang ? (
                 <div className="absolute right-0 mt-4 z-10">
-                  <ul className="border text-base bg-white px-4">
+                  <ul className="border text-base bg-white px-4 dropdown-lang">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Українська
                     </li>
