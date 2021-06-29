@@ -138,7 +138,17 @@
   }
 }
 
-/* HeroSection Select Animation */
+/* HomePage HeroSection news hover block Animation */
+.news-animation {
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%, 0% 50%);
+  transform: scale(1);
+  transition: 1s ease all;
+}
+
+.news-animation:hover {
+  transform: scale(1.2);
+  clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 75% 100%, 25% 100%, 0 100%);
+}
 
 /* CALLLBACKFORM is Collapse Animation */
 .container-form {
