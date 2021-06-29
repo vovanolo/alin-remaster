@@ -74,11 +74,11 @@ export default function HeroSection() {
           </div>
           <div className="border rounded-lg my-5 px-7 py-4">
             <h1 className="text-gray-400">Подача</h1>
-            <select className="w-full border px-4 py-2 cursor-pointer focus:outline-none">
+            <select className="w-full border px-4 py-2 cursor-pointer ring ring-gray-50 focus:ring-gray-300 focus:ring-offset-4 hover:shadow-xl focus:shadow-xl focus:outline-none transition duration-500">
               <option>Львів</option>
-              <option>Львів</option>
-              <option>Львів</option>
-              <option>Львів</option>
+              <option>Харків</option>
+              <option>Івано-Франківськ</option>
+              <option>Київ</option>
             </select>
           </div>
           <button className="bg-red-600 text-white text-lg rounded-lg w-full py-4 hover:bg-red-500 transition duration-500 focus:outline-none">

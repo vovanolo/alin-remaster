@@ -45,6 +45,7 @@
 
 .mp-social {
   overflow: hidden;
+
   transition: all 0.5s;
   height: 56px;
 }

@@ -12,7 +12,7 @@ function MobileBavbar() {
       <div className="menu">
         <div>
           <div>
-            <ul className="flex-col">
+            <ul className="flex-col text-gray-700">
               <li className="mb-0 md:mb-4 lg:mb-0 hover-trigger transition duration-300">
                 <p className="text-white hover:text-red-600 cursor-pointer">
                   Прокат <span className="text-xs">▼</span>
@@ -44,7 +44,9 @@ function MobileBavbar() {
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border-2 text-base bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Асистенс
+                      <Link href={"/assistance"}>
+                        <a>Асистенс</a>
+                      </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Дополнительные услуги
@@ -91,13 +93,19 @@ function MobileBavbar() {
 
 export default function NavBar() {
   const [styleNavbar, setStyleNavbar] = useState("none"); // Стейт для зміни кольору навбару
+  const [changeTextColorNavbar, setChangeTextColorNavbar] =
+    useState("rgb(55, 65, 81)");
   const container = useRef(); // Реф для перевірки hendleOutSide click dropdown
   const [dropdownLang, setDropdownLang] = useState(false); // Open and Close Dropdown Navnar Lang
   const [callBackFormOnClose, setCallBackFormOnClose] = useState(false); // Callback form On or Close
 
   useEffect(() => {
+    // Change BG Color Navbar
     let url = window.location.href;
-    if (url !== "http://localhost:3000/") {
+    if (
+      url !== "http://localhost:3000/" &&
+      url !== "http://localhost:3000/assistance"
+    ) {
       setStyleNavbar("rgb(243, 244, 246)");
     } else {
       setStyleNavbar("none");
@@ -108,6 +116,20 @@ export default function NavBar() {
           setStyleNavbar("none");
         }
       });
+    }
+
+    // Change Text Color Navbar in Assistance
+    if (url === "http://localhost:3000/assistance") {
+      setChangeTextColorNavbar("white");
+      document.addEventListener("scroll", function () {
+        if (window.scrollY >= 80) {
+          setChangeTextColorNavbar("rgb(55, 65, 81)");
+        } else {
+          setChangeTextColorNavbar("white");
+        }
+      });
+    } else {
+      setChangeTextColorNavbar("rgb(55, 65, 81)");
     }
   }, []);
 
@@ -131,7 +153,7 @@ export default function NavBar() {
   });
 
   return (
-    <nav className="text-gray-700">
+    <nav style={{ color: changeTextColorNavbar }}>
       <div
         className="fixed top-0 navbar-color active inset-x-0 py-2 z-20 transtion duration-700"
         style={{ background: styleNavbar }}
@@ -149,7 +171,7 @@ export default function NavBar() {
                   Прокат <span className="text-xs">▼</span>
                 </p>
                 <div className="min-w-max lg:absolute hover-target">
-                  <ul className="border text-base bg-white px-4">
+                  <ul className="border text-base text-gray-700 bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Прокат авто Львів
                     </li>
@@ -173,9 +195,11 @@ export default function NavBar() {
                   Услуги <span className="text-xs">▼</span>
                 </p>
                 <div className="min-w-max lg:absolute hover-target">
-                  <ul className="border text-base bg-white px-4">
+                  <ul className="border text-base text-gray-700 bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Асистенс
+                      <Link href={"/assistance"}>
+                        <a>Асистенс</a>
+                      </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Дополнительные услуги
@@ -191,7 +215,7 @@ export default function NavBar() {
                   О компании <span className="text-xs">▼</span>
                 </p>
                 <div className="min-w-max lg:absolute hover-target">
-                  <ul className="border text-base bg-white px-4">
+                  <ul className="border text-base text-gray-700 bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Программа лояльности
                     </li>
@@ -230,7 +254,7 @@ export default function NavBar() {
                 RU <span className="text-xs">▼</span>
               </button>
               {dropdownLang ? (
-                <div className="absolute right-0 mt-4 z-10">
+                <div className="absolute right-0 text-gray-700 mt-4 z-10">
                   <ul className="border text-base bg-white px-4 dropdown-lang">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Українська
