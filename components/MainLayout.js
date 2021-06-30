@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Callback from "./Callback";
 import CallbackForm from "./CallbackForm";
+import SimpleReactLightbox from "simple-react-lightbox";
 import HeroSection from "../components/section/Car-sale/HeroSection";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
@@ -46,7 +47,9 @@ export function MainLayout({ children, title }) {
 
       {/* Перередаємо функцію тоггле для скривання і відкривання форми тільки на сторінці 'car-sale' */}
       {CollapseCallBackFormInCarSale ? (
-        <HeroSection triggerToggleForm={triggerToggleForm} />
+        <SimpleReactLightbox>
+          <HeroSection triggerToggleForm={triggerToggleForm} />
+        </SimpleReactLightbox>
       ) : null}
 
       <Callback />
