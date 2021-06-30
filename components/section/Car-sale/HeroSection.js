@@ -11,7 +11,7 @@ export default function HeroSection({ triggerToggleForm }) {
   const options = {
     settings: {
       overlayColor: "rgba(0, 0, 0, 0.8)",
-      boxShadow: "inset 0px -50px 49px -30px #fff",
+      boxShadow: "0px 50px 49px -30px #fff",
       autoplaySpeed: 3400,
       transitionSpeed: 1200,
     },
@@ -23,6 +23,7 @@ export default function HeroSection({ triggerToggleForm }) {
       captionColor: "white",
       captionFontFamily: "Raleway, sans-serif",
       captionFontWeight: "300",
+      boxShadow: "inset 0px -50px 49px -30px #fff",
     },
     progressBar: {
       backgroundColor: "none",
@@ -32,14 +33,22 @@ export default function HeroSection({ triggerToggleForm }) {
       showThumbnails: true,
       thumbnailsAlignment: "start",
       thumbnailsContainerBackgroundColor: "#ddd",
-      thumbnailsContainerPadding: "0",
+      thumbnailsContainerPadding: "4px",
       thumbnailsGap: "4px 4px",
       thumbnailsIconColor: "#ffffff",
-      thumbnailsOpacity: 0.4,
+      thumbnailsOpacity: 1,
       thumbnailsPosition: "right",
       thumbnailsSize: ["100px", "80px"],
     },
   };
+
+  // const arrowStyles = {
+  //   position: "absolute",
+  //   top: "50%",
+  //   padding: ".4em",
+  //   outline: "none",
+  //   zIndex: 2,
+  // };
 
   return (
     <article className="container-main mx-auto px-4 xl:px-0 lg:my-10">
@@ -48,19 +57,44 @@ export default function HeroSection({ triggerToggleForm }) {
         <div className="p-5">
           <h1 className="text-3xl text-center mb-3">Chevrolet Malibu</h1>
           <SRLWrapper options={options}>
-            <Carousel infiniteLoop autoPlay showThumbs={false}>
-              <div className="h-96 lg:h-72" onClick={() => openLightbox(2)}>
+            <Carousel
+              // renderArrowPrev={(onClickHandler, hasPrev, label) =>
+              //   hasPrev && (
+              //     <button
+              //       type="button"
+              //       onClick={onClickHandler}
+              //       title={label}
+              //       style={{
+              //         ...arrowStyles,
+              //         left: "0rem",
+              //         backgroundColor: "#FFF",
+              //       }}
+              //     >
+              //       LEFT
+              //     </button>
+              //   )
+              // }
+              autoPlay
+              showThumbs={false}
+            >
+              <div
+                className="h-44 sm:h-96 lg:h-60"
+                onClick={() => openLightbox(2)}
+              >
                 <img
                   className="object-cover h-full w-full"
-                  src="https://picsum.photos/600/350?grayscale"
-                  alt="dogs_benzs"
+                  src="https://picsum.photos/600/400?grayscale"
+                  alt="dogs_benzs_1"
                 />
               </div>
-              <div className="h-96 lg:h-72" onClick={() => openLightbox(1)}>
+              <div
+                className="h-44 sm:h-96 lg:h-60"
+                onClick={() => openLightbox(1)}
+              >
                 <img
                   className="object-cover h-full w-full"
                   src="https://picsum.photos/600/350?grayscale"
-                  alt="dogs_benzs"
+                  alt="dogs_benzs_2"
                 />
               </div>
             </Carousel>
