@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import CallbackForm from "./CallbackForm";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function MobileBavbar() {
   return (
@@ -49,10 +49,14 @@ function MobileBavbar() {
                       </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Дополнительные услуги
+                      <Link href={"/additional-services"}>
+                        <a> Дополнительные услуги</a>
+                      </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Автовикуп
+                      <Link href={"/car-sale"}>
+                        <a>Автовикуп</a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -91,21 +95,18 @@ function MobileBavbar() {
   );
 }
 
-export default function NavBar() {
+export default function NavBar({ triggerToggleForm }) {
+  const router = useRouter();
+  let currentUrl = router.route;
   const [styleNavbar, setStyleNavbar] = useState("none"); // Стейт для зміни кольору навбару
   const [changeTextColorNavbar, setChangeTextColorNavbar] =
     useState("rgb(55, 65, 81)");
   const container = useRef(); // Реф для перевірки hendleOutSide click dropdown
   const [dropdownLang, setDropdownLang] = useState(false); // Open and Close Dropdown Navnar Lang
-  const [callBackFormOnClose, setCallBackFormOnClose] = useState(false); // Callback form On or Close
 
   useEffect(() => {
     // Change BG Color Navbar
-    let url = window.location.href;
-    if (
-      url !== "http://localhost:3000/" &&
-      url !== "http://localhost:3000/assistance"
-    ) {
+    if (currentUrl !== "/" && currentUrl !== "/assistance") {
       setStyleNavbar("rgb(243, 244, 246)");
     } else {
       setStyleNavbar("none");
@@ -119,7 +120,7 @@ export default function NavBar() {
     }
 
     // Change Text Color Navbar in Assistance
-    if (url === "http://localhost:3000/assistance") {
+    if (currentUrl === "/assistance") {
       setChangeTextColorNavbar("white");
       document.addEventListener("scroll", function () {
         if (window.scrollY >= 80) {
@@ -135,10 +136,6 @@ export default function NavBar() {
 
   const triggerToggle = () => {
     setDropdownLang(!dropdownLang);
-  };
-
-  const triggerToggleForm = () => {
-    setCallBackFormOnClose(!callBackFormOnClose);
   };
 
   // Закриваємо dropdown якщо не на жали на нього
@@ -202,10 +199,14 @@ export default function NavBar() {
                       </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Дополнительные услуги
+                      <Link href={"/additional-services"}>
+                        <a> Дополнительные услуги</a>
+                      </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Автовикуп
+                      <Link href={"/car-sale"}>
+                        <a>Автовикуп</a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -310,9 +311,6 @@ export default function NavBar() {
           </div>
         </div>
         <MobileBavbar />
-        {callBackFormOnClose ? (
-          <CallbackForm triggerToggleForm={triggerToggleForm} />
-        ) : null}
       </div>
     </nav>
   );
