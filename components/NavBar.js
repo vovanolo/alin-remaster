@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import LocalPicker from "./LocalPicker";
-import useTranslation from "next-translate/useTranslation";
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import LocalPicker from './LocalPicker';
+import useTranslation from 'next-translate/useTranslation';
 
 function MobileBavbar() {
   return (
@@ -37,7 +37,7 @@ function MobileBavbar() {
                 </div>
               </li>
               <li className="mb-0 md:mb-4  lg:mb-0 text-white hover:text-red-600 transition duration-300">
-                <a href={"/transfers"}>Трансфери</a>
+                <a href={'/transfers'}>Трансфери</a>
               </li>
               <li className="mb-0 md:mb-4  lg:mb-0 hover-trigger transition duration-300">
                 <p className="text-white hover:text-red-600 cursor-pointer">
@@ -46,17 +46,17 @@ function MobileBavbar() {
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border-2 text-base bg-white px-4 rounded-xl">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      <Link href={"/assistance"}>
+                      <Link href={'/assistance'}>
                         <a>Асистенс</a>
                       </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      <Link href={"/additional-services"}>
+                      <Link href={'/additional-services'}>
                         <a> Дополнительные услуги</a>
                       </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      <Link href={"/car-sale"}>
+                      <Link href={'/car-sale'}>
                         <a>Автовикуп</a>
                       </Link>
                     </li>
@@ -82,12 +82,12 @@ function MobileBavbar() {
                 </div>
               </li>
               <li className="mb-0 md:mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
-                <Link href={"/news"}>
+                <Link href={'/news'}>
                   <a>Новости</a>
                 </Link>
               </li>
               <li className="mb-0 md:mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
-                <Link href={"/contacts"}>Контакти</Link>
+                <Link href={'/contacts'}>Контакти</Link>
               </li>
             </ul>
           </div>
@@ -97,61 +97,102 @@ function MobileBavbar() {
   );
 }
 
+const ThemeColors = {
+  white: 'white',
+  none: 'none',
+  grey: 'rgb(243, 244, 246)',
+  dark: 'rgb(55, 65, 81)',
+};
+
+const Theme = {
+  default: {
+    inactive: {
+      background: ThemeColors.white,
+      text: ThemeColors.dark,
+    },
+    active: {
+      background: ThemeColors.grey,
+      text: ThemeColors.dark,
+    },
+  },
+  other: {
+    inactive: {
+      background: ThemeColors.none,
+      text: ThemeColors.white,
+    },
+    active: {
+      background: ThemeColors.grey,
+      text: ThemeColors.dark,
+    },
+  },
+  greyOnly: {
+    inactive: {
+      background: ThemeColors.grey,
+      text: ThemeColors.dark,
+    },
+    active: {
+      background: ThemeColors.grey,
+      text: ThemeColors.dark,
+    },
+  },
+};
+
+const NavState = {
+  Active: 'active',
+  Inactive: 'inactive',
+};
+
 export default function NavBar({ triggerToggleForm }) {
   const router = useRouter();
   let currentUrl = router.route;
-  const [styleNavbar, setStyleNavbar] = useState("none"); // Стейт для зміни кольору навбару
-  const [changeTextColorNavbar, setChangeTextColorNavbar] =
-    useState("rgb(55, 65, 81)");
+
+  const [theme, setTheme] = useState(Theme.default);
+  const [navState, setNavState] = useState(NavState.Inactive);
   let { t } = useTranslation();
 
-  useEffect(() => {
-    // Change BG Color Navbar
-    if (currentUrl !== "/" && currentUrl !== "/assistance") {
-      setStyleNavbar("rgb(243, 244, 246)");
+  const handleWindowScroll = (e) => {
+    if (window.scrollY >= 80) {
+      setNavState(NavState.Active);
     } else {
-      setStyleNavbar("none");
-      document.addEventListener("scroll", function () {
-        if (window.scrollY >= 80) {
-          setStyleNavbar("rgb(243, 244, 246)");
-        } else {
-          setStyleNavbar("none");
-        }
-      });
+      setNavState(NavState.Inactive);
     }
+  };
 
-    // Change Text Color Navbar in Assistance
-    if (currentUrl === "/assistance") {
-      setChangeTextColorNavbar("white");
-      document.addEventListener("scroll", function () {
-        if (window.scrollY >= 80) {
-          setChangeTextColorNavbar("rgb(55, 65, 81)");
-        } else {
-          setChangeTextColorNavbar("white");
-        }
-      });
-    } else {
-      setChangeTextColorNavbar("rgb(55, 65, 81)");
-    }
+  useEffect(() => {
+    window.addEventListener('scroll', handleWindowScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleWindowScroll);
+    };
   }, []);
 
+  useEffect(() => {
+    if (currentUrl === '/') {
+      setTheme(Theme.default);
+    } else if (currentUrl === '/assistance') {
+      setTheme(Theme.other);
+    } else {
+      setTheme(Theme.greyOnly);
+    }
+  }, [currentUrl]);
+
   return (
-    <nav style={{ color: changeTextColorNavbar }}>
+    <nav style={{ color: theme[navState].text }}>
       <div
-        className="fixed top-0 navbar-color active inset-x-0 py-2 z-20 transtion duration-700"
-        style={{ background: styleNavbar }}
+        className="fixed top-0 navbar-color active inset-x-0 py-2 z-20 transition duration-700"
+        style={{ background: theme[navState].background }}
       >
         <div className="container-main mx-auto px-4 xl:px-0 flex justify-between">
           <div className="flex">
             <h1>
-              <Link href={"/"}>LOGO</Link>
+              <Link href={'/'}>LOGO</Link>
             </h1>
           </div>
           <div className="flex-1 hidden w-10/12 lg:flex lg:w-auto items-center justify-end text-lg font-normal">
             <ul className="relative w-10/12 lg:w-auto text-lg font-medium lg:flex space-x-6 mr-5">
               <li className="mb-4 lg:mb-0 transition duration-300 hover-trigger">
                 <p className="hover:text-red-600 cursor-pointer">
-                  {t("common:rent")} <span className="text-xs">▼</span>
+                  {t('common:rent')} <span className="text-xs">▼</span>
                 </p>
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border text-base text-gray-700 bg-white px-4">
@@ -171,7 +212,7 @@ export default function NavBar({ triggerToggleForm }) {
                 </div>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/transfers"}>Трансфери</a>
+                <a href={'/transfers'}>Трансфери</a>
               </li>
               <li className="mb-4 lg:mb-0 transition duration-300 hover-trigger">
                 <p className="hover:text-red-600 cursor-pointer">
@@ -180,17 +221,17 @@ export default function NavBar({ triggerToggleForm }) {
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border text-base text-gray-700 bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      <Link href={"/assistance"}>
+                      <Link href={'/assistance'}>
                         <a>Асистенс</a>
                       </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      <Link href={"/additional-services"}>
+                      <Link href={'/additional-services'}>
                         <a> Дополнительные услуги</a>
                       </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      <Link href={"/car-sale"}>
+                      <Link href={'/car-sale'}>
                         <a>Автовикуп</a>
                       </Link>
                     </li>
@@ -216,12 +257,12 @@ export default function NavBar({ triggerToggleForm }) {
                 </div>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <Link href={"/news"}>
+                <Link href={'/news'}>
                   <a>Новости</a>
                 </Link>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <Link href={"/contacts"}>Контакти</Link>
+                <Link href={'/contacts'}>Контакти</Link>
               </li>
             </ul>
           </div>
