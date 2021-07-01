@@ -1,10 +1,19 @@
 import { MainLayout } from "../../components/MainLayout";
-import NewsHeroSection from "../../components/section/NewsPage/NewsHeroSection";
+import NewsSection from "../../components/NewsSection";
 
-export default function index() {
+export const getStaticProps = async () => {
+  const res = await fetch("https://alin-ua-api.herokuapp.com/places/");
+  const dataNews = await res.json();
+
+  return {
+    props: { news: dataNews },
+  };
+};
+
+export default function index({ news }) {
   return (
     <MainLayout title={"news"}>
-      <NewsHeroSection />
+      <NewsSection news={news} />
     </MainLayout>
   );
 }
