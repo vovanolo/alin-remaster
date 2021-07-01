@@ -9,16 +9,28 @@ export default function HeroSection() {
     <section className="relative flex items-center -mt-24 min-h-screen overflow-hidden">
       <div className="absolute inset-y-0 lg:-right-16 w-full lg:w-1/2 flex items-center pointer-events-none">
         <div className="absolute top-1/2 lg:left-full transform -translate-y-1/2 lg:-translate-x-2/3 w-full opacity-20 object-contain z-0">
-          <Image className="w-full" src={windrose} alt="Car" />
+          <Image
+            className="w-full"
+            src={windrose}
+            alt="Car"
+            layout="responsive"
+          />
         </div>
         <div className="hidden lg:block relative w-full pl-20 z-10">
-          <Image className="w-full" src={mainImage} alt="windrose" />
+          <Image
+            className="w-full"
+            src={mainImage}
+            alt="windrose"
+            layout="responsive"
+          />
         </div>
       </div>
       <div className="container-main mx-auto px-4 xl:px-0 relative z-10">
-        <h1 className="text-4xl md:text-5xl">Оренда авто в Україні</h1>
+        <h1 className="text-4xl sm:text-5xl md:text-5xl">
+          Оренда авто в Україні
+        </h1>
         <div className="lg:w-7/12 text-xl">
-          <div className="flex text-3xl md:text-4xl text-red-600 my-5">
+          <div className="flex text-sm sm:text-3xl md:text-4xl text-red-600 my-5">
             <div className="text">
               <b>
                 <div className="textInnerAnimation">
@@ -64,11 +76,11 @@ export default function HeroSection() {
           </div>
           <div className="border rounded-lg my-5 px-7 py-4">
             <h1 className="text-gray-400">Подача</h1>
-            <select className="w-full border px-4 py-2 cursor-pointer focus:outline-none">
+            <select className="w-full border px-4 py-2 cursor-pointer ring ring-gray-50 focus:ring-gray-300 focus:ring-offset-4 hover:shadow-xl focus:shadow-xl focus:outline-none transition duration-500">
               <option>Львів</option>
-              <option>Львів</option>
-              <option>Львів</option>
-              <option>Львів</option>
+              <option>Харків</option>
+              <option>Івано-Франківськ</option>
+              <option>Київ</option>
             </select>
           </div>
           <button className="bg-red-600 text-white text-lg rounded-lg w-full py-4 hover:bg-red-500 transition duration-500 focus:outline-none">

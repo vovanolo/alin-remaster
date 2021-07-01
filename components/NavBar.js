@@ -1,5 +1,8 @@
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import LocalPicker from './LocalPicker';
+import useTranslation from 'next-translate/useTranslation';
 
 
 function MobileBavbar() {
@@ -12,30 +15,80 @@ function MobileBavbar() {
       <div className="menu">
         <div>
           <div>
-            <ul className="text-white">
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/procat"}>
+            <ul className="flex-col text-gray-700">
+              <li className="mb-0 md:mb-4 lg:mb-0 hover-trigger transition duration-300">
+                <p className="text-white hover:text-red-600 cursor-pointer">
                   Прокат <span className="text-xs">▼</span>
-                </a>
+                </p>
+                <div className="min-w-max lg:absolute hover-target">
+                  <ul className="border-2 text-base bg-white px-4 rounded-xl">
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Львів
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Харків
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Івано-Франківськ
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Київ
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/transfers"}>Трансфери</a>
+              <li className="mb-0 md:mb-4  lg:mb-0 text-white hover:text-red-600 transition duration-300">
+                <a href={'/transfers'}>Трансфери</a>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/ufu"}>
+              <li className="mb-0 md:mb-4  lg:mb-0 hover-trigger transition duration-300">
+                <p className="text-white hover:text-red-600 cursor-pointer">
                   Услуги <span className="text-xs">▼</span>
-                </a>
+                </p>
+                <div className="min-w-max lg:absolute hover-target">
+                  <ul className="border-2 text-base bg-white px-4 rounded-xl">
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      <Link href={'/assistance'}>
+                        <a>Асистенс</a>
+                      </Link>
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      <Link href={'/additional-services'}>
+                        <a> Дополнительные услуги</a>
+                      </Link>
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      <Link href={'/car-sale'}>
+                        <a>Автовикуп</a>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/about"}>
+              <li className="mb-0 md:mb-4  lg:mb-0 hover-trigger transition duration-300">
+                <p className="text-white hover:text-red-600 cursor-pointer">
                   О компании <span className="text-xs">▼</span>
-                </a>
+                </p>
+                <div className="min-w-max lg:absolute hover-target">
+                  <ul className="border-2 text-base bg-white px-4 rounded-xl">
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Программа лояльности
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Faq
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      О нас
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/news"}>Новости</a>
+              <li className="mb-0 md:mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
+                <Link href={'/news'}>
+                  <a>Новости</a>
+                </Link>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <Link href={"/contacts"}>Контакти</Link>
+              <li className="mb-0 md:mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
+                <Link href={'/contacts'}>Контакти</Link>
               </li>
             </ul>
           </div>
@@ -45,121 +98,185 @@ function MobileBavbar() {
   );
 }
 
-export default function NavBar() {
-  const [sideBarToggle, setSideBarToggle] = useState(false);
-  const [styleNavbar, setStyleNavbar] = useState("none");
+const ThemeColors = {
+  white: 'white',
+  none: 'none',
+  grey: 'rgb(243, 244, 246)',
+  dark: 'rgb(55, 65, 81)',
+};
 
-  useEffect(() => {
-    let url = window.location.href;
-    if (url !== "http://localhost:3000/") {
-      setStyleNavbar("rgb(243, 244, 246)");
+const Theme = {
+  default: {
+    inactive: {
+      background: ThemeColors.white,
+      text: ThemeColors.dark,
+    },
+    active: {
+      background: ThemeColors.grey,
+      text: ThemeColors.dark,
+    },
+  },
+  other: {
+    inactive: {
+      background: ThemeColors.none,
+      text: ThemeColors.white,
+    },
+    active: {
+      background: ThemeColors.grey,
+      text: ThemeColors.dark,
+    },
+  },
+  greyOnly: {
+    inactive: {
+      background: ThemeColors.grey,
+      text: ThemeColors.dark,
+    },
+    active: {
+      background: ThemeColors.grey,
+      text: ThemeColors.dark,
+    },
+  },
+};
+
+const NavState = {
+  Active: 'active',
+  Inactive: 'inactive',
+};
+
+export default function NavBar({ triggerToggleForm }) {
+  const router = useRouter();
+  let currentUrl = router.route;
+
+  const [theme, setTheme] = useState(Theme.default);
+  const [navState, setNavState] = useState(NavState.Inactive);
+  let { t } = useTranslation();
+
+  const handleWindowScroll = (e) => {
+    if (window.scrollY >= 80) {
+      setNavState(NavState.Active);
     } else {
-      setStyleNavbar("none");
+      setNavState(NavState.Inactive);
     }
-  }, []);
-
-  const triggerToggle = () => {
-    setSideBarToggle(!sideBarToggle);
   };
 
+  useEffect(() => {
+    window.addEventListener('scroll', handleWindowScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleWindowScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (currentUrl === '/') {
+      setTheme(Theme.default);
+    } else if (currentUrl === '/assistance') {
+      setTheme(Theme.other);
+    } else {
+      setTheme(Theme.greyOnly);
+    }
+  }, [currentUrl]);
+
   return (
-    <nav className="text-gray-700">
+    <nav style={{ color: theme[navState].text }}>
       <div
-        className="fixed top-0 inset-x-0 py-2 z-20"
-        style={{ background: styleNavbar }}
+        className="fixed top-0 navbar-color active inset-x-0 py-2 z-20 transition duration-700"
+        style={{ background: theme[navState].background }}
       >
         <div className="container-main mx-auto px-4 xl:px-0 flex justify-between">
           <div className="flex">
             <h1>
-              <Link href={"/"}>LOGO</Link>
+              <Link href={'/'}>LOGO</Link>
             </h1>
           </div>
           <div className="flex-1 hidden w-10/12 lg:flex lg:w-auto items-center justify-end text-lg font-normal">
-            <ul className="flex space-x-6">
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <div class="dropdown inline-block relative">
-                  <button class="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
-                    <span class="mr-1">
-                      Прокат <span className="text-xs">▼</span>
-                    </span>
-                    <svg
-                      class="fill-current h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />{" "}
-                    </svg>
-                  </button>
-                  <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
-                    <li class="">
-                      <a
-                        class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
-                        href="#"
-                      >
-                        One
-                      </a>
+            <ul className="relative w-10/12 lg:w-auto text-lg font-medium lg:flex space-x-6 mr-5">
+              <li className="mb-4 lg:mb-0 transition duration-300 hover-trigger">
+                <p className="hover:text-red-600 cursor-pointer">
+                  {t('common:rent')} <span className="text-xs">▼</span>
+                </p>
+                <div className="min-w-max lg:absolute hover-target">
+                  <ul className="border text-base text-gray-700 bg-white px-4">
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Львів
                     </li>
-                    <li class="">
-                      <a
-                        class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
-                        href="#"
-                      >
-                        Two
-                      </a>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Харків
                     </li>
-                    <li class="">
-                      <a
-                        class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap"
-                        href="#"
-                      >
-                        Three is the magic number
-                      </a>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Івано-Франківськ
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Прокат авто Київ
                     </li>
                   </ul>
                 </div>
-                <style jsx>
-                  {`
-                    .dropdown:hover .dropdown-menu {
-                      display: block;
-                    }
-                  `}
-                </style>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/transfers"}>Трансфери</a>
+                <a href={'/transfers'}>Трансфери</a>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/ufu"}>
+              <li className="mb-4 lg:mb-0 transition duration-300 hover-trigger">
+                <p className="hover:text-red-600 cursor-pointer">
                   Услуги <span className="text-xs">▼</span>
-                </a>
+                </p>
+                <div className="min-w-max lg:absolute hover-target">
+                  <ul className="border text-base text-gray-700 bg-white px-4">
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      <Link href={'/assistance'}>
+                        <a>Асистенс</a>
+                      </Link>
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      <Link href={'/additional-services'}>
+                        <a> Дополнительные услуги</a>
+                      </Link>
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      <Link href={'/car-sale'}>
+                        <a>Автовикуп</a>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/about"}>
+              <li className="mb-4 lg:mb-0 transition duration-300 hover-trigger">
+                <p className="hover:text-red-600 cursor-pointer">
                   О компании <span className="text-xs">▼</span>
-                </a>
+                </p>
+                <div className="min-w-max lg:absolute hover-target">
+                  <ul className="border text-base text-gray-700 bg-white px-4">
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Программа лояльности
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      Faq
+                    </li>
+                    <li className="hover:text-red-600 cursor-pointer my-2">
+                      О нас
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/news"}>Новости</a>
+                <Link href={'/news'}>
+                  <a>Новости</a>
+                </Link>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <Link href={"/contacts"}>Контакти</Link>
+                <Link href={'/contacts'}>Контакти</Link>
               </li>
             </ul>
           </div>
           <div className="flex items-center">
             <button
+              onClick={triggerToggleForm}
               className="bg-red-600 text-white text-sm md:text-base rounded-lg px-4 md:px-10 py-2.5 mx-5 
-          hover:bg-red-500 focus:outline-none"
+              hover:bg-red-500 focus:outline-none"
             >
               Связь
             </button>
-            <div>
-              RU <span className="text-xs">▼</span>
-            </div>
-            <button
-              onClick={triggerToggle}
-              className="flex lg:hidden hover:text-red-400 ml-5 focus:outline-none"
-            >
+            <LocalPicker />
+            <button className="flex lg:hidden hover:text-red-400 ml-5 focus:outline-none">
               <svg
                 width="30"
                 height="30"
