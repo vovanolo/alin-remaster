@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+
 function MobileBavbar() {
   return (
     <div className="block lg:hidden menu-wrap">
