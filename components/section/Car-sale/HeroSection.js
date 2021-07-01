@@ -78,7 +78,7 @@ export default function HeroSection({ triggerToggleForm }) {
               showThumbs={false}
             >
               <div
-                className="h-44 sm:h-96 lg:h-60"
+                className="h-44 sm:h-96 lg:h-60 cursor-pointer"
                 onClick={() => openLightbox(2)}
               >
                 <img
@@ -88,7 +88,7 @@ export default function HeroSection({ triggerToggleForm }) {
                 />
               </div>
               <div
-                className="h-44 sm:h-96 lg:h-60"
+                className="h-44 sm:h-96 lg:h-60 cursor-pointer"
                 onClick={() => openLightbox(1)}
               >
                 <img

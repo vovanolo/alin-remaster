@@ -26,9 +26,11 @@ export default function HeroSection() {
         </div>
       </div>
       <div className="container-main mx-auto px-4 xl:px-0 relative z-10">
-        <h1 className="text-4xl md:text-5xl">Оренда авто в Україні</h1>
+        <h1 className="text-4xl sm:text-5xl md:text-5xl">
+          Оренда авто в Україні
+        </h1>
         <div className="lg:w-7/12 text-xl">
-          <div className="flex text-3xl md:text-4xl text-red-600 my-5">
+          <div className="flex text-sm sm:text-3xl md:text-4xl text-red-600 my-5">
             <div className="text">
               <b>
                 <div className="textInnerAnimation">

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import LocalPicker from "./LocalPicker";
+import useTranslation from "next-translate/useTranslation";
 
 function MobileBavbar() {
   return (
@@ -18,7 +20,7 @@ function MobileBavbar() {
                   Прокат <span className="text-xs">▼</span>
                 </p>
                 <div className="min-w-max lg:absolute hover-target">
-                  <ul className="border-2 text-base bg-white px-4">
+                  <ul className="border-2 text-base bg-white px-4 rounded-xl">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Прокат авто Львів
                     </li>
@@ -42,7 +44,7 @@ function MobileBavbar() {
                   Услуги <span className="text-xs">▼</span>
                 </p>
                 <div className="min-w-max lg:absolute hover-target">
-                  <ul className="border-2 text-base bg-white px-4">
+                  <ul className="border-2 text-base bg-white px-4 rounded-xl">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       <Link href={"/assistance"}>
                         <a>Асистенс</a>
@@ -66,7 +68,7 @@ function MobileBavbar() {
                   О компании <span className="text-xs">▼</span>
                 </p>
                 <div className="min-w-max lg:absolute hover-target">
-                  <ul className="border-2 text-base bg-white px-4">
+                  <ul className="border-2 text-base bg-white px-4 rounded-xl">
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       Программа лояльности
                     </li>
@@ -101,8 +103,7 @@ export default function NavBar({ triggerToggleForm }) {
   const [styleNavbar, setStyleNavbar] = useState("none"); // Стейт для зміни кольору навбару
   const [changeTextColorNavbar, setChangeTextColorNavbar] =
     useState("rgb(55, 65, 81)");
-  const container = useRef(); // Реф для перевірки hendleOutSide click dropdown
-  const [dropdownLang, setDropdownLang] = useState(false); // Open and Close Dropdown Navnar Lang
+  let { t } = useTranslation();
 
   useEffect(() => {
     // Change BG Color Navbar
@@ -134,21 +135,6 @@ export default function NavBar({ triggerToggleForm }) {
     }
   }, []);
 
-  const triggerToggle = () => {
-    setDropdownLang(!dropdownLang);
-  };
-
-  // Закриваємо dropdown якщо не на жали на нього
-  const handleClickOutside = (event) => {
-    if (container.current && !container.current.contains(event.target)) {
-      setDropdownLang(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-  });
-
   return (
     <nav style={{ color: changeTextColorNavbar }}>
       <div
@@ -165,7 +151,7 @@ export default function NavBar({ triggerToggleForm }) {
             <ul className="relative w-10/12 lg:w-auto text-lg font-medium lg:flex space-x-6 mr-5">
               <li className="mb-4 lg:mb-0 transition duration-300 hover-trigger">
                 <p className="hover:text-red-600 cursor-pointer">
-                  Прокат <span className="text-xs">▼</span>
+                  {t("common:rent")} <span className="text-xs">▼</span>
                 </p>
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border text-base text-gray-700 bg-white px-4">
@@ -247,32 +233,7 @@ export default function NavBar({ triggerToggleForm }) {
             >
               Связь
             </button>
-            <div className="relative transition deley-300" ref={container}>
-              <button
-                onClick={triggerToggle}
-                className="uppercase w-12 hover:text-red-600 focus:outline-none"
-              >
-                RU <span className="text-xs">▼</span>
-              </button>
-              {dropdownLang ? (
-                <div className="absolute right-0 text-gray-700 mt-4 z-10">
-                  <ul className="border text-base bg-white px-4 dropdown-lang">
-                    <li className="hover:text-red-600 cursor-pointer my-2">
-                      Українська
-                    </li>
-                    <li className="hover:text-red-600 cursor-pointer my-2">
-                      Русский
-                    </li>
-                    <li className="hover:text-red-600 cursor-pointer my-2">
-                      English
-                    </li>
-                    <li className="hover:text-red-600 cursor-pointer my-2">
-                      Poland
-                    </li>
-                  </ul>
-                </div>
-              ) : null}
-            </div>
+            <LocalPicker />
             <button className="flex lg:hidden hover:text-red-400 ml-5 focus:outline-none">
               <svg
                 width="30"
