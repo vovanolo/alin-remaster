@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import Callback from "./Callback";
 import CallbackForm from "./CallbackForm";
 import SimpleReactLightbox from "simple-react-lightbox";
-import HeroSection from "../components/section/Car-sale/HeroSection";
+import HeroSection from "../components/sections/Car-sale/HeroSection";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 

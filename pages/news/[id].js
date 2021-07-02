@@ -2,6 +2,16 @@ import { useRouter } from "next/router";
 import { MainLayout } from "../../components/MainLayout";
 import NewSections from "../../components/NewSections";
 
+export default function New({ news }) {
+  const router = useRouter();
+
+  return (
+    <MainLayout title={news.name}>
+      <NewSections news={news} />
+    </MainLayout>
+  );
+}
+
 export const getStaticPaths = async () => {
   const res = await fetch("https://alin-ua-api.herokuapp.com/places");
   const dataNews = await res.json();
@@ -27,13 +37,3 @@ export const getStaticProps = async (context) => {
     props: { news: dataNews },
   };
 };
-
-export default function New({ news }) {
-  const router = useRouter();
-
-  return (
-    <MainLayout title={news.name}>
-      <NewSections news={news} />
-    </MainLayout>
-  );
-}
