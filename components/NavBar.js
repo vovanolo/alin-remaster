@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import LocalPicker from "./LocalPicker";
 import useTranslation from "next-translate/useTranslation";
 
-function MobileBavbar() {
+function MobileNavBar() {
   return (
     <div className="block lg:hidden menu-wrap">
       <input type="checkbox" className="toggler" />
@@ -312,7 +312,7 @@ export default function NavBar({ triggerToggleForm }) {
             </button>
           </div>
         </div>
-        <MobileBavbar />
+        <MobileNavBar />
       </div>
     </nav>
   );
