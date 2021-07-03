@@ -357,8 +357,8 @@ export default function NavBar({ triggerToggleForm }) {
           <div className="flex items-center">
             <button
               onClick={triggerToggleForm}
-              className="bg-red-600 text-white text-sm md:text-base rounded-lg px-4 md:px-10 py-2.5 mx-5 
-              hover:bg-red-500 focus:outline-none"
+              className="bg-red-600 text-white text-sm md:text-base rounded-lg px-4 md:px-10 py-2.5 mx-5 main-button
+              transform hover:scale-110 button transition duration-300"
             >
               Связь
             </button>

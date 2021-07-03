@@ -3,8 +3,28 @@ import windrose from "../../../images/thumb__720_704_0_0_crop.png";
 import mainImage from "../../../images/thumb__634_394_0_0_crop.png";
 import svgClanendar from "../../../images/calendar.svg";
 import svgBackInTime from "../../../images/back-in-time.svg";
+import { useState } from "react";
+
+const AnimationSection = {
+  inactive:
+    "w-full border px-4 py-2 cursor-pointer ring ring-gray-50 focus:ring-gray-300 focus:ring-offset-4 hover:shadow-xl focus:shadow-xl focus:outline-none transition duration-500 dropdown-section",
+  active:
+    "w-full border px-4 py-2 cursor-pointer ring ring-gray-50 focus:ring-gray-300 focus:ring-offset-4 hover:shadow-xl focus:shadow-xl focus:outline-none transition duration-500 option-active",
+};
 
 export default function HeroSection() {
+  const [isOpensection, setIsOpensection] = useState(AnimationSection.inactive);
+  const [tf, setTf] = useState(false);
+
+  const changeSelectClassName = () => {
+    setTf(!tf);
+    if (tf) {
+      setIsOpensection(AnimationSection.active);
+    } else {
+      setIsOpensection(AnimationSection.inactive);
+    }
+  };
+
   return (
     <section className="relative flex items-center -mt-24 min-h-screen overflow-hidden">
       <div className="absolute inset-y-0 lg:-right-16 w-full lg:w-1/2 flex items-center pointer-events-none">
@@ -76,14 +96,14 @@ export default function HeroSection() {
           </div>
           <div className="border rounded-lg my-5 px-7 py-4">
             <h1 className="text-gray-400 mb-2">Подача</h1>
-            <select className="w-full border px-4 py-2 cursor-pointer ring ring-gray-50 focus:ring-gray-300 focus:ring-offset-4 hover:shadow-xl focus:shadow-xl focus:outline-none transition duration-500">
+            <select onClick={changeSelectClassName} className={isOpensection}>
               <option>Львів</option>
               <option>Харків</option>
               <option>Івано-Франківськ</option>
               <option>Київ</option>
             </select>
           </div>
-          <button className="bg-red-600 text-white text-lg rounded-lg w-full py-4 hover:bg-red-500 transition duration-500 focus:outline-none">
+          <button className="bg-red-600 text-white text-lg rounded-lg w-full py-4 hover:bg-red-500 transition duration-500 main-button focus:outline-none">
             Обрати авто
           </button>
         </div>
