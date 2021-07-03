@@ -47,7 +47,7 @@ export default function HeroSection() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 border rounded-lg my-5 px-7 py-4">
             <div>
-              <label className="text-gray-400">Оберіть дату</label>
+              <label className="text-gray-400 mb-2">Оберіть дату</label>
               <div className="flex flex-row relative">
                 <input
                   className="w-full text-black removeDefaultIcon"
@@ -62,7 +62,7 @@ export default function HeroSection() {
               </div>
             </div>
             <div>
-              <label className="text-gray-400">Оберіть час </label>
+              <label className="text-gray-400 mb-2">Оберіть час </label>
               <div className="flex flex-row relative">
                 <input
                   className="w-full text-black removeDefaultIcon"
@@ -75,7 +75,7 @@ export default function HeroSection() {
             </div>
           </div>
           <div className="border rounded-lg my-5 px-7 py-4">
-            <h1 className="text-gray-400">Подача</h1>
+            <h1 className="text-gray-400 mb-2">Подача</h1>
             <select className="w-full border px-4 py-2 cursor-pointer ring ring-gray-50 focus:ring-gray-300 focus:ring-offset-4 hover:shadow-xl focus:shadow-xl focus:outline-none transition duration-500">
               <option>Львів</option>
               <option>Харків</option>

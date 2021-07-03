@@ -49,6 +49,7 @@
   -o-animation-delay: 1s;
   animation-delay: 1s;
 }
+
 @keyframes move {
   0% {
     top: 0px;
@@ -61,6 +62,52 @@
   }
   60% {
     top: -150px;
+  }
+}
+
+/* HeroSection Text Animation mobile */
+@media screen and (min-width: 250px) and (max-width: 640px) {
+  .text .textInnerAnimation {
+    display: inline-block;
+    color: #e74c3c;
+    position: relative;
+    white-space: nowrap;
+    top: 0;
+    left: 0;
+
+    /*animation*/
+    -webkit-animation: move-mobile 5s;
+    -moz-animation: move-mobile 5s;
+    -ms-animation: move-mobile 5s;
+    -o-animation: move-mobile 5s;
+    animation: move-mobile 5s;
+    /*animation-iteration-count*/
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -ms-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    /*animation-delay*/
+    -webkit-animation-delay: 1s;
+    -moz-animation-delay: 1s;
+    -ms-animation-delay: 1s;
+    -o-animation-delay: 1s;
+    animation-delay: 1s;
+  }
+}
+
+@keyframes move-mobile {
+  0% {
+    top: 0px;
+  }
+  20% {
+    top: -50px;
+  }
+  40% {
+    top: -100px;
+  }
+  60% {
+    top: -134px;
   }
 }
 
@@ -127,7 +174,10 @@
 }
 
 .dropdown-lang {
-  animation: drbd-lang-on 0.4s linear;
+  opacity: 1;
+  height: 138px;
+  transform: scale(1);
+  transition: all 0.8s;
 }
 
 @keyframes drbd-lang-on {
@@ -141,6 +191,27 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+.dropdown-lang-close {
+  opacity: 0;
+  height: 0;
+  transform: scale(0);
+  transition: all 0.8s;
+}
+
+@keyframes drbd-lang-off {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  40% {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 0;
+    transform: scale(0);
   }
 }
 

@@ -3,30 +3,14 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Callback from "./Callback";
 import CallbackForm from "./CallbackForm";
-import SimpleReactLightbox from "simple-react-lightbox";
-import HeroSection from "../components/sections/Car-sale/HeroSection";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 
 export function MainLayout({ children, title }) {
-  const router = useRouter();
-  let currentPage = router.route;
-
   const [callBackFormOnClose, setCallBackFormOnClose] = useState(false); // Callback form On or Close
-  const [CollapseCallBackFormInCarSale, setCollapseCallBackFormInCarSale] =
-    useState(false);
 
   const triggerToggleForm = () => {
     setCallBackFormOnClose(!callBackFormOnClose);
   };
-
-  useEffect(() => {
-    if (currentPage === "/car-sale") {
-      setCollapseCallBackFormInCarSale(true);
-    } else {
-      setCollapseCallBackFormInCarSale(false);
-    }
-  }, []);
 
   return (
     <div className="wrapper">
@@ -44,13 +28,6 @@ export function MainLayout({ children, title }) {
       ) : null}
 
       <main className="text-gray-700 mt-24">{children}</main>
-
-      {/* Перередаємо функцію тоггле для скривання і відкривання форми тільки на сторінці 'car-sale' */}
-      {CollapseCallBackFormInCarSale ? (
-        <SimpleReactLightbox>
-          <HeroSection triggerToggleForm={triggerToggleForm} />
-        </SimpleReactLightbox>
-      ) : null}
 
       <Callback />
 
