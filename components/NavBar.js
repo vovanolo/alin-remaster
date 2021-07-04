@@ -75,7 +75,6 @@ function MobileNavBar({ changeHambOnClose }) {
                               : ""
                           }
                         >
-                          {" "}
                           Дополнительные услуги
                         </a>
                       </Link>
