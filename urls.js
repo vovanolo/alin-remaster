@@ -4,6 +4,7 @@ const urls = {
   assistance: "/assistance",
   additionalServices: "/additional-services",
   carSale: "/car-sale",
+  faq: "/faq",
   news: "/news",
   contacts: "/contacts",
 };

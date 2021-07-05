@@ -146,7 +146,7 @@ export default function HeroSection() {
             transition={{ duration: 2 }}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 border rounded-lg my-5 px-7 py-4">
-              <div>
+              <motion.div whileHover={{ scale: 1.1 }}>
                 <label className="text-gray-400 mb-2">Оберіть дату</label>
                 <div className="flex flex-row relative">
                   <input
@@ -160,8 +160,11 @@ export default function HeroSection() {
                     <Image src={svgClanendar} height={20} width={25} />
                   </span>
                 </div>
-              </div>
-              <div>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                className="ml-0 sm:ml-0 md:ml-4 lg:ml-4"
+              >
                 <label className="text-gray-400 mb-2">Оберіть час </label>
                 <div className="flex flex-row relative">
                   <input
@@ -172,16 +175,21 @@ export default function HeroSection() {
                     <Image src={svgBackInTime} height={20} width={25} />
                   </span>
                 </div>
-              </div>
+              </motion.div>
             </div>
             <div className="border rounded-lg my-5 px-7 py-4">
-              <h1 className="text-gray-400 mb-2">Подача</h1>
-              <select onClick={changeSelectClassName} className={isOpensection}>
-                <option>Львів</option>
-                <option>Харків</option>
-                <option>Івано-Франківськ</option>
-                <option>Київ</option>
-              </select>
+              <div>
+                <h1 className="text-gray-400 mb-2">Подача</h1>
+                <select
+                  onClick={changeSelectClassName}
+                  className={isOpensection}
+                >
+                  <option>Львів</option>
+                  <option>Харків</option>
+                  <option>Івано-Франківськ</option>
+                  <option>Київ</option>
+                </select>
+              </div>
             </div>
           </motion.div>
           <motion.button

@@ -327,7 +327,9 @@ export default function NavBar({ triggerToggleForm }) {
                       Программа лояльности
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Faq
+                      <Link href={urls.faq}>
+                        <a>Faq</a>
+                      </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       О нас
