@@ -1,21 +1,21 @@
 import { MainLayout } from "../../components/MainLayout";
 import NewSections from "../../components/NewSections";
 
-export default function New({ dataNew }) {
+export default function Transfer({ transfer }) {
   return (
-    <MainLayout title={dataNew.title}>
-      <NewSections dataNew={dataNew} />
+    <MainLayout title={transfer.title}>
+      <NewSections transfer={transfer} />
     </MainLayout>
   );
 }
 
 export async function getStaticPaths({ locales }) {
   const res = await fetch(
-    `https://alin-remaster.herokuapp.com/advertises?_locale=${locales}`
+    `https://alin-remaster.herokuapp.com/transfers?_locale=${locales}`
   );
-  const dataNews = await res.json();
+  const dataTransferNews = await res.json();
 
-  const paths = dataNews.map((item) => {
+  const paths = dataTransferNews.map((item) => {
     return [
       { params: { id: item.slug, locale: "en" } },
       { params: { id: item.slug, locale: "ua" } },
@@ -33,11 +33,11 @@ export async function getStaticPaths({ locales }) {
 export async function getStaticProps(context) {
   const id = context.params.id;
   const res = await fetch(
-    "https://alin-remaster.herokuapp.com/advertises/" + id
+    "https://alin-remaster.herokuapp.com/transfers/" + id
   );
-  const dataNews = await res.json();
+  const dataTransferNews = await res.json();
 
   return {
-    props: { dataNew: dataNews },
+    props: { transfer: dataTransferNews },
   };
 }

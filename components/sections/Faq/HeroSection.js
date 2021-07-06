@@ -147,22 +147,37 @@ export default function HeroSection() {
             key={item.id}
             className="my-8"
           >
-            <div className="cursor-pointer relative border-2">
+            <div className="relative border-2">
               <div
                 onClick={() => handleClick(index)}
-                className="flex justify-between"
+                className="cursor-pointer flex justify-between"
               >
                 <h3 className="text-lg lg:text-2xl pl-4 pr-12 md:px-24 py-5">
                   {item.title}
                 </h3>
-                <motion.p
-                  initial={{ rotate: 0 }}
-                  animate={isOpen === index ? { rotate: -360 } : { rotate: 0 }}
-                  transition={{ duration: 0.8 }}
-                  className="text-6xl text-red-600 font-bold pr-4"
-                >
-                  {isOpen !== index ? <span>+</span> : <span>-</span>}
-                </motion.p>
+                <div className="text-6xl text-red-600 font-bold pr-4">
+                  {isOpen !== index ? (
+                    <motion.p
+                      initial={{ rotate: 0 }}
+                      animate={
+                        isOpen !== index ? { rotate: -360 } : { rotate: 0 }
+                      }
+                      transition={{ duration: 0.8 }}
+                    >
+                      +
+                    </motion.p>
+                  ) : (
+                    <motion.p
+                      initial={{ rotate: 0 }}
+                      animate={
+                        isOpen !== index ? { rotate: -360 } : { rotate: 0 }
+                      }
+                      transition={{ duration: 0.8 }}
+                    >
+                      -
+                    </motion.p>
+                  )}
+                </div>
               </div>
               <div className="bg-gray-100">
                 <motion.div

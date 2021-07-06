@@ -13,9 +13,9 @@ export default function Home({ news }) {
   );
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps = async ({locale}) => {
   const res = await fetch(
-    "https://alin-ua-api.herokuapp.com/places?_start=1&_limit=3"
+    `https://alin-remaster.herokuapp.com/advertises?_locale=${locale}`
   );
   const dataNews = await res.json();
 

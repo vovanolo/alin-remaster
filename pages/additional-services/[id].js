@@ -1,21 +1,21 @@
 import { MainLayout } from "../../components/MainLayout";
-import NewSections from "../../components/NewSections";
+import NewSection from "../../components/NewSections";
 
-export default function New({ dataNew }) {
+export default function additionalService({ option }) {
   return (
-    <MainLayout title={dataNew.title}>
-      <NewSections dataNew={dataNew} />
+    <MainLayout title={option.title}>
+      <NewSection option={option} />
     </MainLayout>
   );
 }
 
 export async function getStaticPaths({ locales }) {
   const res = await fetch(
-    `https://alin-remaster.herokuapp.com/advertises?_locale=${locales}`
+    `https://alin-remaster.herokuapp.com/additional-options?_locale=${locales}`
   );
-  const dataNews = await res.json();
+  const dataOption = await res.json();
 
-  const paths = dataNews.map((item) => {
+  const paths = dataOption.map((item) => {
     return [
       { params: { id: item.slug, locale: "en" } },
       { params: { id: item.slug, locale: "ua" } },
@@ -33,11 +33,11 @@ export async function getStaticPaths({ locales }) {
 export async function getStaticProps(context) {
   const id = context.params.id;
   const res = await fetch(
-    "https://alin-remaster.herokuapp.com/advertises/" + id
+    "https://alin-remaster.herokuapp.com/additional-options/" + id
   );
-  const dataNews = await res.json();
+  const dataOption = await res.json();
 
   return {
-    props: { dataNew: dataNews },
+    props: { option: dataOption },
   };
 }

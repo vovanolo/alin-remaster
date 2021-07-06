@@ -7,10 +7,9 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useAnimation } from "framer-motion";
 
-export default function NewsSection({ news }) {
+export default function NewsSection({ news, transfersNews, options }) {
   const router = useRouter();
   let currentUrl = router.route;
-  const [currentPage, setCurrentPage] = useState(false);
   // Animation into scroll block]
   const [ref, intView] = useInView(); // { threshold: 0.1 }
   const animation = useAnimation();
@@ -23,53 +22,112 @@ export default function NewsSection({ news }) {
       });
     }
     if (!intView) {
-      animation.start({ scale: 0.4, opacity: 0 });
+      animation.start({ scale: 0.4, opacity: 0.3 });
     }
   }, [intView]);
-
-  useEffect(() => {
-    if (currentUrl === "/") {
-      setCurrentPage(true);
-    } else if (currentUrl === "/news") {
-      setCurrentPage(true);
-    } else {
-      setCurrentPage(false);
-    }
-  }, []);
 
   return (
     <section
       ref={ref}
       className="container-main mx-auto px-4 xl:px-0 mb-10 mt-4"
     >
-      {currentPage ? (
+      {currentUrl === "/" ? (
         <motion.h1 animate={animation} className="text-4xl mb-9">
           Новости
         </motion.h1>
-      ) : (
+      ) : currentUrl === "/news" ? (
+        <motion.h1 animate={animation} className="text-4xl mb-9">
+          Новости
+        </motion.h1>
+      ) : currentUrl === "/additional-services" ? (
         <motion.h1 animate={animation} className="text-4xl mb-9">
           Дополнительные услуги
         </motion.h1>
+      ) : (
+        <motion.h1 animate={animation} className="text-4xl mb-9">
+          Прокат авто с водителем
+        </motion.h1>
       )}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
-        {news.map((item, i) => (
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={animation}
-            transition={{ delay: i }}
-            key={item.id}
-            className="news-animation"
-          >
-            <Link href={"/news/" + item.slug}>
-              <a>
-                <Image className="w-full" src={newsCar} layout="responsive" />
-                <h1 className="bg-gray-100 text-lg text-center py-2">
-                  {item.name}
-                </h1>
-              </a>
-            </Link>
-          </motion.div>
-        ))}
+        {currentUrl === "/" || currentUrl === "/news"
+          ? news.map((item, i) => (
+              <motion.div
+                initial={{ scale: 1, opacity: 1 }}
+                animate={{
+                  scale: [0, 0.4, 0.3, 1],
+                  opacity: [0.034, 0.4, 0.3, 1],
+                }}
+                transition={{ delay: i }}
+                key={item.id}
+                className="news-animation"
+              >
+                <Link href={"/news/" + item.slug}>
+                  <a>
+                    <Image
+                      className="w-full"
+                      src={newsCar}
+                      layout="responsive"
+                    />
+                    <h1 className="bg-gray-100 text-lg text-center py-2">
+                      {item.title}
+                    </h1>
+                  </a>
+                </Link>
+              </motion.div>
+            ))
+          : currentUrl === "/additional-services"
+          ? options.map((item, i) => (
+              <motion.div
+                initial={{ scale: 1, opacity: 1 }}
+                animate={{
+                  scale: [0, 0.4, 0.3, 1],
+                  opacity: [0.034, 0.4, 0.3, 1],
+                }}
+                transition={{ delay: i }}
+                key={item.id}
+                className="news-animation"
+              >
+                <Link href={"/additional-services/" + item.slug}>
+                  <a>
+                    <Image
+                      className="w-full"
+                      src={newsCar}
+                      layout="responsive"
+                    />
+                    <h1 className="bg-gray-100 text-lg text-center py-2">
+                      {item.title}
+                    </h1>
+                  </a>
+                </Link>
+              </motion.div>
+            ))
+          : currentUrl === "/transfers" || currentUrl === "/rent-with-driver"
+          ? transfersNews.map((item, i) => (
+              <motion.div
+                initial={{ scale: 1, opacity: 1 }}
+                animate={{
+                  scale: [0, 0.4, 0.3, 1],
+                  opacity: [0.034, 0.4, 0.3, 1],
+                }}
+                transition={{ delay: i }}
+                key={item.id}
+                className="news-animation"
+              >
+                <Link href={"/transfers/" + item.slug}>
+                  <a>
+                    <Image
+                      className="w-full"
+                      src={newsCar}
+                      layout="responsive"
+                    />
+                    <h1 className="bg-gray-100 text-lg text-center py-2">
+                      {item.title}
+                    </h1>
+                  </a>
+                </Link>
+              </motion.div>
+            ))
+          : null}
       </div>
     </section>
   );

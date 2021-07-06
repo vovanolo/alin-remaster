@@ -34,7 +34,7 @@ export default function LocalPicker() {
   });
 
   const changeLanguagesUA = () => {
-    router.push(router.asPath, router.asPath, { locale: "ua" });
+    router.push(router.asPath, router.asPath, { locale: "uk" });
     setDropdownLang(AnimationDropDown.close);
     setTf(false);
   };

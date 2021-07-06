@@ -153,10 +153,7 @@ export default function HeroSection() {
                     className="w-full text-black removeDefaultIcon"
                     type="date"
                   />
-                  <span
-                    className="absolute right-0 px-2 py-0.5 pointer-events-none"
-                    id="calend"
-                  >
+                  <span className="absolute right-0 px-2 py-0.5 pointer-events-none">
                     <Image src={svgClanendar} height={20} width={25} />
                   </span>
                 </div>

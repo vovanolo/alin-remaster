@@ -47,7 +47,15 @@ function MobileNavBar({ changeHambOnClose }) {
                 </div>
               </li>
               <li className="mb-0 md:mb-4  lg:mb-0 text-white hover:text-red-600 transition duration-300">
-                <a href={urls.transfers}>Трансфери</a>
+                <Link href={urls.rentWithDriver}>
+                  <a
+                    className={
+                      currentUrl === "/rentWithDriver" ? "text-red-600" : ""
+                    }
+                  >
+                    Трансфери
+                  </a>
+                </Link>
               </li>
               <li className="mb-0 md:mb-4  lg:mb-0 hover-trigger transition duration-300">
                 <p className="text-white hover:text-red-600 cursor-pointer">
@@ -100,14 +108,18 @@ function MobileNavBar({ changeHambOnClose }) {
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border-2 text-base bg-white px-4 rounded-xl">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Программа лояльности
+                      <Link href={urls.loyaltyProgram}>
+                        <a>Программа лояльности</a>
+                      </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Faq
+                      <Link href={urls.faq}>
+                        <a>faq</a>
+                      </Link>
                     </li>
-                    <li className="hover:text-red-600 cursor-pointer my-2">
-                      О нас
-                    </li>
+                    <Link href={urls.about}>
+                      <a>О нас</a>
+                    </Link>
                   </ul>
                 </div>
               </li>
@@ -266,12 +278,15 @@ export default function NavBar({ triggerToggleForm }) {
                 </div>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a
-                  className={currentUrl === "/transfers" ? "text-red-600" : ""}
-                  href={urls.transfers}
-                >
-                  Трансфери
-                </a>
+                <Link href={urls.rentWithDriver}>
+                  <a
+                    className={
+                      currentUrl === "/rentWithDriver" ? "text-red-600" : ""
+                    }
+                  >
+                    Трансфери
+                  </a>
+                </Link>
               </li>
               <li className="mb-4 lg:mb-0 transition duration-300 hover-trigger">
                 <p className="hover:text-red-600 cursor-pointer">
@@ -324,7 +339,9 @@ export default function NavBar({ triggerToggleForm }) {
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border text-base text-gray-700 bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Программа лояльности
+                      <Link href={urls.loyaltyProgram}>
+                        <a>Программа лояльности</a>
+                      </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
                       <Link href={urls.faq}>
@@ -332,7 +349,9 @@ export default function NavBar({ triggerToggleForm }) {
                       </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      О нас
+                      <Link href={urls.about}>
+                        <a>О нас</a>
+                      </Link>
                     </li>
                   </ul>
                 </div>

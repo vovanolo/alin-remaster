@@ -1,6 +1,10 @@
 import Router from "next/router";
+import { useRouter } from "next/router";
 
-export default function NewSections({ news }) {
+export default function NewSections({ dataNew, transfer, option }) {
+  const router = useRouter();
+  let currentPage = router.route;
+
   return (
     <article className="container-main mx-auto px-4 xl:px-0 lg:my-10">
       <section className="relative h-full flex flex-wrap md:flex-row-reverse content-between md:content-end overflow-hidden text-white px-0 xl:px-20">
@@ -12,7 +16,7 @@ export default function NewSections({ news }) {
           <div className="absolute inset-0 bg-black bg-opacity-75"></div>
         </div>
         <div className="w-full lg:w-2/3 px-5 my-10 z-10">
-          <h1 className="text-3xl font-bold">{news.name}</h1>
+          <h1 className="text-3xl font-bold">{dataNew.title}</h1>
         </div>
         <div className="w-full lg:w-1/3 px-5 flex my-10 z-10">
           <div className="w-1/3 text-gray-400">
@@ -20,8 +24,8 @@ export default function NewSections({ news }) {
             <p>Категорія:</p>
           </div>
           <div className="w-2/3">
-            <p>{news.created_at}</p>
-            <p>{news.category.title}</p>
+            <p>{dataNew.created_at}</p>
+            <p>{dataNew.id}</p>
           </div>
         </div>
       </section>
@@ -58,7 +62,7 @@ export default function NewSections({ news }) {
           </div>
           <div className="w-full md:w-2/3">
             <div>
-              <p>{news.desc}</p>
+              <p>{dataNew.description}</p>
             </div>
           </div>
         </div>

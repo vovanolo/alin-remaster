@@ -1,25 +1,27 @@
 import { MainLayout } from "../../components/MainLayout";
 import NewsSection from "../../components/NewsSection";
 
-export default function index({ newsServices }) {
+export default function index({ options }) {
   return (
     <MainLayout title="Дополнительные услуги">
-      <NewsSection news={newsServices} />
+      <NewsSection options={options} />
     </MainLayout>
   );
 }
 
-export const getStaticProps = async () => {
-  const res = await fetch("https://alin-ua-api.herokuapp.com/places");
-  const dataNews = await res.json();
+export async function getStaticProps({ locale }) {
+  const res = await fetch(
+    `https://alin-remaster.herokuapp.com/additional-options?_locale=${locale}`
+  );
+  const dataAdditionalServices = await res.json();
 
-  if (!dataNews) {
+  if (!dataAdditionalServices) {
     return {
       notFound: true,
     };
   }
 
   return {
-    props: { newsServices: dataNews },
+    props: { options: dataAdditionalServices },
   };
-};
+}
