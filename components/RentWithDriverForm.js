@@ -21,6 +21,16 @@ let schema = yup.object().shape({
 
 export default function RentWithDriverForm() {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedTime, setSelectedTime] = useState(new Date());
+
+  const ExampleCustomTimeInput = ({ date, value, onChange }) => (
+    <input
+      type="time"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="text-lg font-normal py-2 px-2"
+    />
+  );
 
   return (
     <Formik
@@ -30,7 +40,7 @@ export default function RentWithDriverForm() {
         rent_email: "",
         rent_comment: "",
         date: selectedDate,
-        time: "",
+        time: selectedTime,
         locationFrom: "Львов",
       }}
       validationSchema={schema}
@@ -38,7 +48,7 @@ export default function RentWithDriverForm() {
         setTimeout(() => {
           resetForm({});
           alert(JSON.stringify(values, null, 2));
-          alert(selectedDate);
+          alert(selectedDate, selectedTime);
           setSubmitting(false);
         }, 400);
       }}
@@ -73,7 +83,6 @@ export default function RentWithDriverForm() {
                   filterDate={(date) =>
                     date.getDay() !== 6 && date.getDay() === 5
                   }
-                  value={values.date}
                   className="cursor-pointer w-full mt-2 bg-transparent focus:outline-none removeDefaultIcon"
                 />
                 <span className="cursor-pointer absolute right-8 mt-2 pointer-events-none">
@@ -84,15 +93,21 @@ export default function RentWithDriverForm() {
             <div></div>
             <div className="col-span-2">
               <label>Выберите время</label>
-              <div className="flex flex-row relative">
-                {/* <input
-                  className="w-full bg-transparent mt-2 focus:outline-none removeDefaultIcon"
-                  name="time"
-                  type="time"
-                  min={""}
+              <div className="flex relative">
+                <DatePicker
+                  selected={selectedTime}
+                  onChange={(time) => setSelectedTime(time)}
+                  dateFormat={"hh:mm"}
+                  timeInputLabel={<label className="text-lg">Time:</label>}
+                  showTimeSelectOnly
+                  showTimeInput
+                  minTime={new Date()}
+                  filterTime={new Date()}
+                  customTimeInput={<ExampleCustomTimeInput />}
                   value={values.time}
-                /> */}
-                <span className="cursor-pointer absolute right-0 mt-2 pointer-events-none">
+                  className="cursor-pointer w-full mt-2 bg-transparent focus:outline-none removeDefaultIcon"
+                />
+                <span className="cursor-pointer absolute right-8 mt-2 pointer-events-none">
                   <Image src={svgBackInTime} height={20} width={25} />
                 </span>
               </div>
