@@ -29,8 +29,9 @@ export default function CallbackForm({
             }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={(values, { setSubmitting, resetForm }) => {
             setTimeout(() => {
+              resetForm({});
               alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
               triggerToggleForm();

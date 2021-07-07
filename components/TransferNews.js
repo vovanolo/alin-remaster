@@ -1,24 +1,70 @@
 import Link from "next/link";
 import Image from "next/image";
 import photo from "../images/thumb__540_360_0_0_crop.webp";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
 
 export default function TransferNews({ transfersNews }) {
+  // Animation into scroll block]
+  const [ref, intView] = useInView({ threshold: 0.3 }); // { threshold: 0.1 }
+  const animation = useAnimation();
+  const animationText = useAnimation();
+
+  useEffect(() => {
+    if (intView) {
+      animation.start({
+        visibility: "visible",
+        opacity: 1,
+        x: "0",
+      });
+      animationText.start({
+        visibility: "visible",
+        opacity: 1,
+        x: "0",
+      });
+    }
+    if (!intView) {
+      animation.start({ visibility: "hidden", opacity: 0, x: "-100%" });
+      animationText.start({
+        visibility: "hidden",
+        opacity: 0,
+        x: "100%",
+      });
+    }
+  }, [intView]);
+
   return (
-    <section className="container-main mx-auto px-4 xl:px-0 py-10">
-      {transfersNews.map((item) => (
-        <div className="grid lg:grid-cols-2 gap-7 my-20">
-          <div className="lg:order-1">
+    <section className="container-main mx-auto px-4 xl:px-0 py-10 overflow-hidden">
+      {transfersNews.map((item, i) => (
+        <div
+          key={item.id}
+          ref={ref}
+          className="grid lg:grid-cols-2 gap-7 my-20"
+        >
+          <motion.div
+            initial={{ opacity: 0, x: "-100%" }}
+            animate={animation}
+            transition={{ duration: 1, delay: i }}
+            className="lg:order-1"
+          >
             <Image src={photo} layout="responsive" />
-          </div>
-          <div className="flex flex-wrap content-between lg:order-2">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={animationText}
+            transition={{ duration: 1, delay: i }}
+            className="flex flex-wrap content-between lg:order-2"
+          >
             <h2 className="text-4xl">{item.title}</h2>
             <p className="my-4">{item.description}</p>
             <Link href={"/transfers/" + item.slug}>
-              <a class="text-lg bg-red-600 text-white rounded-lg px-10 py-2">
+              <a className="text-lg bg-red-600 text-white rounded-lg px-10 py-2">
                 Получить цену
               </a>
             </Link>
-          </div>
+          </motion.div>
         </div>
       ))}
     </section>
