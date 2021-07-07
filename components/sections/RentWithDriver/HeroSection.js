@@ -37,30 +37,25 @@ export default function HeroSection() {
   useEffect(() => {
     if (intView) {
       animation.start({
-        visibility: "visible",
         opacity: 1,
         x: "0",
       });
       animationText.start({
-        visibility: "visible",
         opacity: 1,
         scale: "1",
       });
       animationRentWithDriver.start({
-        visibility: "visible",
         opacity: 1,
         x: "0",
       });
     }
     if (!intView) {
-      animation.start({ visibility: "hidden", opacity: 0, x: "100%" });
+      animation.start({ opacity: 0, x: "100%" });
       animationText.start({
-        visibility: "hidden",
         opacity: 0,
         scale: "0",
       });
       animationRentWithDriver.start({
-        visibility: "hidden",
         opacity: 0,
         x: "-400%",
       });
@@ -73,7 +68,7 @@ export default function HeroSection() {
       className="relative min-h-screen flex flex-wrap items-center overflow-hidden text-white px-0 xl:px-20 pt-24 -mt-24"
     >
       <motion.div
-        initial={{ visibility: "hidden", opacity: 0, x: "100%" }}
+        initial={{ opacity: 0, x: "100%" }}
         animate={animation}
         transition={{ duration: 1 }}
         className="absolute inset-0 z-0"
@@ -84,7 +79,7 @@ export default function HeroSection() {
       <div className="container-main mx-auto px-4 xl:px-0 flex flex-wrap z-10 mb-10">
         <div className="w-full lg:w-5/12 lg:pr-5">
           <motion.h1
-            initial={{ visibility: "hidden", opacity: "0", scale: 0 }}
+            initial={{ opacity: "0", scale: 0 }}
             animate={animationText}
             transition={{ duration: 2 }}
             className="text-5xl mb-12"
@@ -95,7 +90,7 @@ export default function HeroSection() {
             {rentWithDriver.map((item, index) => (
               <motion.div
                 key={item.id}
-                initial={{ visibility: "hidden", opacity: 0, x: "-400%" }}
+                initial={{ opacity: 0, x: "-400%" }}
                 animate={animationRentWithDriver}
                 transition={{ duration: index + 1 }}
                 className="flex items-center"
@@ -107,9 +102,9 @@ export default function HeroSection() {
           </div>
         </div>
         <motion.div
-          initial={{ visibility: "hidden", opacity: 0, x: "100%" }}
-          // transition={{ damping: 1.2 }}
+          initial={{ opacity: 0, x: "100%" }}
           animate={animation}
+          transition={{ delay: 0.3 }}
           className="w-full lg:w-7/12 relative"
         >
           <RentWithDriverForm />

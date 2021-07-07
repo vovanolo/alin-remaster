@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useAnimation } from "framer-motion";
+import urls from "../urls";
 
 export default function NewsSection({ news, transfersNews, options }) {
   const router = useRouter();
@@ -31,15 +32,15 @@ export default function NewsSection({ news, transfersNews, options }) {
       ref={ref}
       className="container-main mx-auto px-4 xl:px-0 mb-10 mt-4"
     >
-      {currentUrl === "/" ? (
+      {currentUrl === urls.home ? (
         <motion.h1 animate={animation} className="text-4xl mb-9">
           Новости
         </motion.h1>
-      ) : currentUrl === "/news" ? (
+      ) : currentUrl === urls.news ? (
         <motion.h1 animate={animation} className="text-4xl mb-9">
           Новости
         </motion.h1>
-      ) : currentUrl === "/additional-services" ? (
+      ) : currentUrl === urls.additionalServices ? (
         <motion.h1 animate={animation} className="text-4xl mb-9">
           Дополнительные услуги
         </motion.h1>
@@ -49,7 +50,7 @@ export default function NewsSection({ news, transfersNews, options }) {
         </motion.h1>
       )}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
-        {currentUrl === "/" || currentUrl === "/news"
+        {currentUrl === urls.home || currentUrl === urls.news
           ? news.map((item, i) => (
               <motion.div
                 initial={{ scale: 1, opacity: 1 }}
@@ -75,7 +76,7 @@ export default function NewsSection({ news, transfersNews, options }) {
                 </Link>
               </motion.div>
             ))
-          : currentUrl === "/additional-services"
+          : currentUrl === urls.additionalServices
           ? options.map((item, i) => (
               <motion.div
                 initial={{ scale: 1, opacity: 1 }}
@@ -101,7 +102,7 @@ export default function NewsSection({ news, transfersNews, options }) {
                 </Link>
               </motion.div>
             ))
-          : currentUrl === "/transfers" || currentUrl === "/rent-with-driver"
+          : currentUrl === urls.transfers || currentUrl === urls.rentWithDriver
           ? transfersNews.map((item, i) => (
               <motion.div
                 initial={{ scale: 1, opacity: 1 }}

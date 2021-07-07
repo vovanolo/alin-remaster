@@ -8,27 +8,24 @@ import { useAnimation } from "framer-motion";
 
 export default function TransferNews({ transfersNews }) {
   // Animation into scroll block]
-  const [ref, intView] = useInView({ threshold: 0.3 }); // { threshold: 0.1 }
+  const [ref, intView] = useInView({ threshold: 0.7 }); // { threshold: 0.1 }
   const animation = useAnimation();
   const animationText = useAnimation();
 
   useEffect(() => {
     if (intView) {
       animation.start({
-        visibility: "visible",
         opacity: 1,
         x: "0",
       });
       animationText.start({
-        visibility: "visible",
         opacity: 1,
         x: "0",
       });
     }
     if (!intView) {
-      animation.start({ visibility: "hidden", opacity: 0, x: "-100%" });
+      animation.start({ opacity: 0, x: "-100%" });
       animationText.start({
-        visibility: "hidden",
         opacity: 0,
         x: "100%",
       });
@@ -36,13 +33,12 @@ export default function TransferNews({ transfersNews }) {
   }, [intView]);
 
   return (
-    <section className="container-main mx-auto px-4 xl:px-0 py-10 overflow-hidden">
+    <section
+      ref={ref}
+      className="container-main mx-auto px-4 xl:px-0 py-10 overflow-hidden"
+    >
       {transfersNews.map((item, i) => (
-        <div
-          key={item.id}
-          ref={ref}
-          className="grid lg:grid-cols-2 gap-7 my-20"
-        >
+        <div key={item.id} className="grid lg:grid-cols-2 gap-7 my-20">
           <motion.div
             initial={{ opacity: 0, x: "-100%" }}
             animate={animation}
