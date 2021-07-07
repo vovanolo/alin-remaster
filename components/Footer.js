@@ -225,7 +225,7 @@ export default function Footer() {
       </div>
       <div className="border-t border-red-600 py-1">
         <p className="text-center">
-          development studio :{" "}
+          development studio :
           <strong className="border border-red-600 rounded-full px-2">
             <a href="https://uken.in.ua">Uken.in.ua</a>
           </strong>
