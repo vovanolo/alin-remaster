@@ -4,6 +4,7 @@ import "../styles/mobilenavbar.css";
 import "../styles/Callback.css";
 import "../styles/button.css";
 import "../styles/loader.css";
+import "../styles/datepicker.css";
 import Router from "next/router";
 import React, { useState } from "react";
 import Loader from "../components/Loader";

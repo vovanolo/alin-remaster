@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { useRef, useEffect, useState } from "react";
 import { Formik, Field } from "formik";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import * as yup from "yup";
 import Image from "next/image";
 import svgClanendar from "../images/calendar.svg";
@@ -80,12 +79,10 @@ export default function RentWithDriverForm() {
                   onChange={(date) => setSelectedDate(date)}
                   dateFormat={"dd/MM/yyyy"}
                   minDate={new Date()}
-                  filterDate={(date) =>
-                    date.getDay() !== 6 && date.getDay() === 5
-                  }
+                  filterDate={(date) => date.getDay() === 4}
                   className="cursor-pointer w-full mt-2 bg-transparent focus:outline-none removeDefaultIcon"
                 />
-                <span className="cursor-pointer absolute right-8 mt-2 pointer-events-none">
+                <span className="cursor-pointer absolute right-0 mt-2 pointer-events-none">
                   <Image src={svgClanendar} height={20} width={25} />
                 </span>
               </div>
@@ -97,7 +94,7 @@ export default function RentWithDriverForm() {
                 <DatePicker
                   selected={selectedTime}
                   onChange={(time) => setSelectedTime(time)}
-                  dateFormat={"hh:mm"}
+                  dateFormat={"HH:mm"}
                   timeInputLabel={<label className="text-lg">Time:</label>}
                   showTimeSelectOnly
                   showTimeInput
@@ -107,7 +104,7 @@ export default function RentWithDriverForm() {
                   value={values.time}
                   className="cursor-pointer w-full mt-2 bg-transparent focus:outline-none removeDefaultIcon"
                 />
-                <span className="cursor-pointer absolute right-8 mt-2 pointer-events-none">
+                <span className="cursor-pointer absolute right-0 mt-2 pointer-events-none">
                   <Image src={svgBackInTime} height={20} width={25} />
                 </span>
               </div>
@@ -117,21 +114,24 @@ export default function RentWithDriverForm() {
           <div className="relative border rounded-lg px-5 md:px-7 py-4">
             <label>Подача</label>
             <Field
-              className="w-full bg-transparent py-2 focus:outline-none"
+              className="cursor-pointer w-full bg-transparent py-2 hover:text-red-600 focus:outline-none"
               name="locationFrom"
               as="select"
               value={values.locationFrom}
             >
-              <option className="bg-gray-800" value="Львов">
+              <option className="text-white bg-gray-800" value="Львов">
                 Львов
               </option>
-              <option className="bg-gray-800" value="Харьков">
+              <option className="text-white bg-gray-800" value="Харьков">
                 Харьков
               </option>
-              <option className="bg-gray-800" value="Ивано-Франковск">
+              <option
+                className="text-white bg-gray-800"
+                value="Ивано-Франковск"
+              >
                 Ивано-Франковск
               </option>
-              <option className="bg-gray-800" value="Киев">
+              <option className="text-white bg-gray-800" value="Киев">
                 Киев
               </option>
             </Field>
@@ -142,7 +142,7 @@ export default function RentWithDriverForm() {
 
           <div
             className={
-              !errors.rent_name
+              !errors.rent_name && !touched.rent_name
                 ? "relative border rounded-lg px-5 md:px-7 py-1"
                 : "relative border border-red-600 rounded-lg px-5 md:px-7 py-1"
             }
@@ -164,7 +164,7 @@ export default function RentWithDriverForm() {
           <div className="grid md:grid-cols-2 gap-10 md:gap-5">
             <div
               className={
-                !errors.rent_phone
+                !errors.rent_phone && !touched.rent_phone
                   ? "relative border rounded-lg px-5 md:px-7 py-1"
                   : "relative border border-red-600 rounded-lg px-5 md:px-7 py-1"
               }
@@ -181,7 +181,7 @@ export default function RentWithDriverForm() {
             </div>
             <div
               className={
-                !errors.rent_email
+                !errors.rent_email && !touched.rent_email
                   ? "relative border rounded-lg px-5 md:px-7 py-1"
                   : "relative border border-red-600 rounded-lg px-5 md:px-7 py-1"
               }

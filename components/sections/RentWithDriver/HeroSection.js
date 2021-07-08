@@ -28,7 +28,7 @@ const rentWithDriver = [
 ];
 
 export default function HeroSection() {
-  // Animation into scroll block]
+  // Animation into scroll block
   const [ref, intView] = useInView({ threshold: 0.3 }); // { threshold: 0.1 }
   const animation = useAnimation();
   const animationText = useAnimation();
