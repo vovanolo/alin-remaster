@@ -32,23 +32,13 @@ export default function NewsSection({ news, transfersNews, options }) {
       ref={ref}
       className="container-main mx-auto px-4 xl:px-0 mb-10 mt-4"
     >
-      {currentUrl === urls.home ? (
-        <motion.h1 animate={animation} className="text-4xl mb-9">
-          Новости
-        </motion.h1>
-      ) : currentUrl === urls.news ? (
-        <motion.h1 animate={animation} className="text-4xl mb-9">
-          Новости
-        </motion.h1>
-      ) : currentUrl === urls.additionalServices ? (
-        <motion.h1 animate={animation} className="text-4xl mb-9">
-          Дополнительные услуги
-        </motion.h1>
-      ) : (
-        <motion.h1 animate={animation} className="text-4xl mb-9">
-          Прокат авто с водителем
-        </motion.h1>
-      )}
+      <motion.h1 animate={animation} className="text-4xl mb-9">
+        {currentUrl === urls.home || currentUrl === urls.news
+          ? "Новости"
+          : currentUrl === urls.additionalServices
+          ? "Дополнительные услуги"
+          : "Прокат авто с водителем"}
+      </motion.h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
         {currentUrl === urls.home || currentUrl === urls.news
           ? news.map((item, i) => (

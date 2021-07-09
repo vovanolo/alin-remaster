@@ -6,6 +6,7 @@ import * as yup from "yup";
 import Image from "next/image";
 import svgClanendar from "../images/calendar.svg";
 import svgBackInTime from "../images/back-in-time.svg";
+import { motion } from "framer-motion";
 
 let schema = yup.object().shape({
   rent_name: yup.string().required(),
@@ -63,17 +64,15 @@ export default function RentWithDriverForm() {
         /* and other goodies */
       }) => (
         <form onSubmit={handleSubmit} className="border rounded-lg p-5 md:p-10">
-          <div className="grid md:grid-cols-5 border rounded-lg px-5 md:px-7 mb-10 py-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1 }}
+            className="grid md:grid-cols-5 border rounded-lg px-5 md:px-7 mb-10 py-4"
+          >
             <div className="col-span-2">
               <label>Выберите дату</label>
               <div className="flex relative">
-                {/* <input
-                  className="w-full bg-transparent mt-2 focus:outline-none removeDefaultIcon"
-                  name="date"
-                  type="date"
-                  min="07/07/2021"
-                  value={values.date}
-                /> */}
                 <DatePicker
                   selected={selectedDate}
                   onChange={(date) => setSelectedDate(date)}
@@ -109,9 +108,14 @@ export default function RentWithDriverForm() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative border rounded-lg px-5 md:px-7 py-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0, x: "43%" }}
+            animate={{ opacity: 1, scale: 1, x: "0" }}
+            transition={{ delay: 1 }}
+            className="relative border rounded-lg px-5 md:px-7 py-4"
+          >
             <label>Подача</label>
             <Field
               className="cursor-pointer w-full bg-transparent py-2 hover:text-red-600 focus:outline-none"
@@ -135,14 +139,17 @@ export default function RentWithDriverForm() {
                 Киев
               </option>
             </Field>
-          </div>
+          </motion.div>
           <p className="text-red-600 px-5 md:px-7 mb-10">
             {errors.locationFrom && touched.locationFrom && errors.locationFrom}
           </p>
 
-          <div
+          <motion.div
+            initial={{ opacity: 0, scale: 0, x: "43%" }}
+            animate={{ opacity: 1, scale: 1, x: "0" }}
+            transition={{ delay: 1 }}
             className={
-              !errors.rent_name && !touched.rent_name
+              !touched.rent_name
                 ? "relative border rounded-lg px-5 md:px-7 py-1"
                 : "relative border border-red-600 rounded-lg px-5 md:px-7 py-1"
             }
@@ -156,15 +163,20 @@ export default function RentWithDriverForm() {
               className="w-full bg-transparent py-2 focus:outline-none"
               placeholder="Имя"
             />
-          </div>
+          </motion.div>
           <p className="text-red-600 px-5 md:px-7 mb-10">
             {errors.rent_name && touched.rent_name && errors.rent_name}
           </p>
 
-          <div className="grid md:grid-cols-2 gap-10 md:gap-5">
+          <motion.div
+            initial={{ opacity: 0, scale: 0, x: "43%" }}
+            animate={{ opacity: 1, scale: 1, x: "0" }}
+            transition={{ delay: 1 }}
+            className="grid md:grid-cols-2 gap-0 md:gap-10 md:gap-5"
+          >
             <div
               className={
-                !errors.rent_phone && !touched.rent_phone
+                !touched.rent_phone
                   ? "relative border rounded-lg px-5 md:px-7 py-1"
                   : "relative border border-red-600 rounded-lg px-5 md:px-7 py-1"
               }
@@ -179,9 +191,13 @@ export default function RentWithDriverForm() {
                 placeholder="Телефон"
               />
             </div>
+            <p className="block md:hidden text-red-600 px-5 md:px-7 mb-10">
+              {errors.rent_phone && touched.rent_phone && errors.rent_phone}
+            </p>
+
             <div
               className={
-                !errors.rent_email && !touched.rent_email
+                !touched.rent_email
                   ? "relative border rounded-lg px-5 md:px-7 py-1"
                   : "relative border border-red-600 rounded-lg px-5 md:px-7 py-1"
               }
@@ -196,17 +212,27 @@ export default function RentWithDriverForm() {
                 placeholder="Email"
               />
             </div>
-          </div>
-          <div className="grid md:grid-cols-2 gap-10 md:gap-5 mb-10">
-            <p className="text-red-600 px-5 md:px-7">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0, x: "43%" }}
+            animate={{ opacity: 1, scale: 1, x: "0" }}
+            transition={{ delay: 1 }}
+            className="grid md:grid-cols-2 gap-10 md:gap-5 mb-10"
+          >
+            <p className="hidden md:block text-red-600 px-5 md:px-7">
               {errors.rent_phone && touched.rent_phone && errors.rent_phone}
             </p>
             <p className="text-red-600 px-5 md:px-7">
               {errors.rent_email && touched.rent_email && errors.rent_email}
             </p>
-          </div>
+          </motion.div>
 
-          <div className="relative border rounded-lg px-5 md:px-7 my-10 py-1">
+          <motion.div
+            initial={{ opacity: 0, scale: 0, x: "43%" }}
+            animate={{ opacity: 1, scale: 1, x: "0" }}
+            transition={{ delay: 1 }}
+            className="relative border rounded-lg px-5 md:px-7 my-10 py-1"
+          >
             <textarea
               type="text"
               name="rent_comment"
@@ -216,7 +242,7 @@ export default function RentWithDriverForm() {
               className="w-full bg-transparent py-2 focus:outline-none"
               placeholder="Комментарий"
             ></textarea>
-          </div>
+          </motion.div>
 
           <button
             disabled={isSubmitting}

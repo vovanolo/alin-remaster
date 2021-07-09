@@ -39,7 +39,13 @@ export default function TextSection() {
         transition={{ duration: 1 }}
         className="lg:absolute left-0 lg:w-1/2"
       >
-        <Image src={font} alt="font-car" height={384} layout="responsive" />
+        <Image
+          src={font}
+          alt="font-car"
+          height={384}
+          layout="responsive"
+          loading="lazy"
+        />
       </motion.div>
       <div className="container-main mx-auto px-4 xl:px-0">
         <div className="flex flex-wrap items-center">

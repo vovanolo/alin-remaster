@@ -18,7 +18,7 @@ export async function getStaticPaths({ locales }) {
   const paths = dataTransferNews.map((item) => {
     return [
       { params: { id: item.slug, locale: "en" } },
-      { params: { id: item.slug, locale: "ua" } },
+      { params: { id: item.slug, locale: "uk" } },
       { params: { id: item.slug, locale: "ru" } },
       { params: { id: item.slug, locale: "pl" } },
     ];

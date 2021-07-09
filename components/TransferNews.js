@@ -8,7 +8,7 @@ import { useAnimation } from "framer-motion";
 
 export default function TransferNews({ transfersNews }) {
   // Animation into scroll block]
-  const [ref, intView] = useInView({ threshold: 0.7 }); // { threshold: 0.1 }
+  const [ref, intView] = useInView({ threshold: 0.4 }); // { threshold: 0.1 }
   const animation = useAnimation();
   const animationText = useAnimation();
 
