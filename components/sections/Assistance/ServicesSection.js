@@ -10,50 +10,50 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useAnimation } from "framer-motion";
 
-const personalServices = [
-  {
-    id: 1,
-    img: first,
-    title: "Запись авто на ремонт или проведения техобслуживания",
-    transition: 0,
-  },
-  {
-    id: 2,
-    img: second,
-    title: "Страхование авто",
-    transition: 1,
-  },
-  {
-    id: 3,
-    img: third,
-    title: "Заказ эвакуатора",
-    transition: 1.5,
-  },
-  {
-    id: 4,
-    img: fourth,
-    title:
-      "Подбор автозапчастей соответствии с Вашими пожеланиями (б / у, новые)",
-    transition: 2.5,
-  },
-  {
-    id: 5,
-    img: fifth,
-    title: "Оформление полиса гражданской ответственности",
-    transition: 3,
-  },
-  {
-    id: 6,
-    img: sixth,
-    title: "Продажа автомобиля",
-    transition: 3.4,
-  },
-];
-
 export default function ServicesSection() {
   // Animation into scroll block]
   const [ref, intView] = useInView({ threshold: 0.4 }); // { threshold: 0.1 }
   const animation = useAnimation();
+
+  const personalServices = [
+    {
+      id: 1,
+      img: first,
+      title: "Запись авто на ремонт или проведения техобслуживания",
+      transition: 0,
+    },
+    {
+      id: 2,
+      img: second,
+      title: "Страхование авто",
+      transition: 1,
+    },
+    {
+      id: 3,
+      img: third,
+      title: "Заказ эвакуатора",
+      transition: 1.5,
+    },
+    {
+      id: 4,
+      img: fourth,
+      title:
+        "Подбор автозапчастей соответствии с Вашими пожеланиями (б / у, новые)",
+      transition: 2.5,
+    },
+    {
+      id: 5,
+      img: fifth,
+      title: "Оформление полиса гражданской ответственности",
+      transition: 3,
+    },
+    {
+      id: 6,
+      img: sixth,
+      title: "Продажа автомобиля",
+      transition: 3.4,
+    },
+  ];
 
   useEffect(() => {
     if (intView) {

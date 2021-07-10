@@ -149,9 +149,9 @@ export default function RentWithDriverForm() {
             animate={{ opacity: 1, scale: 1, x: "0" }}
             transition={{ delay: 1 }}
             className={
-              !touched.rent_name
-                ? "relative border rounded-lg px-5 md:px-7 py-1"
-                : "relative border border-red-600 rounded-lg px-5 md:px-7 py-1"
+              touched.rent_name && errors.rent_name
+                ? "relative border border-red-600 rounded-lg px-5 md:px-7 py-1"
+                : "relative border rounded-lg px-5 md:px-7 py-1"
             }
           >
             <input
@@ -176,9 +176,9 @@ export default function RentWithDriverForm() {
           >
             <div
               className={
-                !touched.rent_phone
-                  ? "relative border rounded-lg px-5 md:px-7 py-1"
-                  : "relative border border-red-600 rounded-lg px-5 md:px-7 py-1"
+                touched.rent_phone && errors.rent_phone
+                  ? "relative border border-red-600 rounded-lg px-5 md:px-7 py-1"
+                  : "relative border rounded-lg px-5 md:px-7 py-1"
               }
             >
               <input
@@ -197,9 +197,9 @@ export default function RentWithDriverForm() {
 
             <div
               className={
-                !touched.rent_email
-                  ? "relative border rounded-lg px-5 md:px-7 py-1"
-                  : "relative border border-red-600 rounded-lg px-5 md:px-7 py-1"
+                touched.rent_email && errors.rent_email
+                  ? "relative border border-red-600 rounded-lg px-5 md:px-7 py-1"
+                  : "relative border rounded-lg px-5 md:px-7 py-1"
               }
             >
               <input
