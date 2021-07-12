@@ -48,23 +48,24 @@ export default function HeroSection() {
           <AnimateSharedLayout>
             {mapLocation.map((item, index) => (
               <div key={item.id}>
-                {/* <button
-                    onClick={() => triggerToggle(index)}
-                    className={
-                      index !== isToggle
-                        ? "border-2 focus:border-red-600 focus:outline-none rounded-lg px-3 py-1 mb-4"
-                        : "border-2 border-red-600 focus:outline-none rounded-lg px-3 py-1 mb-4"
-                    }
-                  >
-                    {item.title}
-                  </button> */}
-                <Item
+                <motion.button
+                  whileTap={{ scale: 1.2 }}
+                  onClick={() => triggerToggle(index)}
+                  className={
+                    index !== isToggle
+                      ? "border-2 focus:outline-none rounded-lg px-3 py-1 mb-4 border-button"
+                      : "border-2 border-red-600 focus:outline-none rounded-lg px-3 py-1 mb-4 border-button"
+                  }
+                >
+                  <span>{item.title}</span>
+                </motion.button>
+                {/* <Item
                   key={item.color}
                   color={item.color}
                   isSelected={isToggle === index}
                   title={item.title}
                   onClick={() => triggerToggle(index)}
-                />
+                /> */}
                 <ul className="px-3 py-1">
                   <li className="text-lg text-gray-700">{item.descLock}</li>
                 </ul>

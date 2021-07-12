@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { useRef, useEffect, useState } from "react";
 import { Formik, Field } from "formik";
-import DatePicker from "react-datepicker";
 import * as yup from "yup";
+import DatePicker from "react-datepicker";
 import Image from "next/image";
 import svgClanendar from "../images/calendar.svg";
 import svgBackInTime from "../images/back-in-time.svg";

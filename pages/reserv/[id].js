@@ -1,5 +1,5 @@
 import { MainLayout } from "../../components/MainLayout";
-import HeroSection from "../../components/sections/Rent/HeroSection";
+import HeroSection from "../../components/sections/Reserv/HeroSection";
 
 export default function Reserv() {
   return (

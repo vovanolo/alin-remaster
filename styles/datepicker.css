@@ -20,7 +20,7 @@
   width: 0;
 }
 
-.react-datepicker-popper[data-placement^="bottom"]
+/* .react-datepicker-popper[data-placement^="bottom"]
   .react-datepicker__triangle::before,
 .react-datepicker-popper[data-placement^="top"]
   .react-datepicker__triangle::before,
@@ -44,7 +44,7 @@
 .react-datepicker-popper[data-placement^="top"]
   .react-datepicker__triangle::before {
   border-bottom-color: #aeaeae;
-}
+} */
 
 .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle {
   top: 0;

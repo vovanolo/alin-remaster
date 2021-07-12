@@ -3,10 +3,12 @@ import windrose from "../../../images/thumb__720_704_0_0_crop.png";
 import mainImage from "../../../images/thumb__634_394_0_0_crop.png";
 import svgClanendar from "../../../images/calendar.svg";
 import svgBackInTime from "../../../images/back-in-time.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useAnimation } from "framer-motion";
+// import { FormContext } from "../../Context";
+import DatePicker from "react-datepicker";
 
 const AnimationSelect = {
   inactive:
@@ -18,6 +20,8 @@ const AnimationSelect = {
 export default function HeroSection() {
   const [isOpensection, setIsOpensection] = useState(AnimationSelect.inactive);
   const [tf, setTf] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedTime, setSelectedTime] = useState(new Date());
   // Animation into scroll block]
   const [refScroll, intView] = useInView(); // { threshold: 0.1 }
   const animationCar = useAnimation();
@@ -149,9 +153,13 @@ export default function HeroSection() {
               <motion.div whileHover={{ scale: 1.1 }}>
                 <label className="text-gray-400 mb-2">Оберіть дату</label>
                 <div className="flex flex-row relative">
-                  <input
-                    className="w-full text-black removeDefaultIcon"
-                    type="date"
+                  <DatePicker
+                    selected={selectedDate}
+                    onChange={(date) => setSelectedDate(date)}
+                    dateFormat={"dd.MM.yyyy"}
+                    minDate={new Date()}
+                    filterDate={(date) => date.getDay() === 4}
+                    className="text-black cursor-pointer w-full bg-transparent focus:outline-none removeDefaultIcon"
                   />
                   <span className="absolute right-0 px-2 py-0.5 pointer-events-none">
                     <Image src={svgClanendar} height={20} width={25} />
@@ -164,9 +172,16 @@ export default function HeroSection() {
               >
                 <label className="text-gray-400 mb-2">Оберіть час </label>
                 <div className="flex flex-row relative">
-                  <input
-                    className="w-full text-black removeDefaultIcon"
-                    type="time"
+                  <DatePicker
+                    selected={selectedTime}
+                    onChange={(time) => setSelectedTime(time)}
+                    dateFormat={"HH:mm"}
+                    timeInputLabel={<label className="text-lg">Time:</label>}
+                    showTimeSelectOnly
+                    showTimeInput
+                    minTime={new Date()}
+                    filterTime={new Date()}
+                    className="text-black cursor-pointer w-full bg-transparent focus:outline-none removeDefaultIcon"
                   />
                   <span className="absolute right-0 px-2 py-0.5 pointer-events-none">
                     <Image src={svgBackInTime} height={20} width={25} />
@@ -190,9 +205,8 @@ export default function HeroSection() {
             </div>
           </motion.div>
           <motion.button
-            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 1.2 }}
-            className="bg-red-600 text-white text-lg rounded-lg w-full py-4 hover:bg-red-500 main-button focus:outline-none"
+            className="bg-red-600 text-white text-lg rounded-lg w-full py-4 hover:bg-red-500 focus:outline-none"
           >
             Обрати авто
           </motion.button>

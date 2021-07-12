@@ -31,7 +31,6 @@ export default function HeroSection() {
   }, [intView]);
 
   const router = useRouter();
-  let currUrl = router.route;
 
   const [crumbs, setCrumbs] = useState([
     {
@@ -67,61 +66,6 @@ export default function HeroSection() {
   return (
     <article className="container-main mx-auto px-4 xl:px-0">
       <BreadCrumbs crumbs={crumbs} selected={selected} />
-      {currUrl === "/rent/[id]" ? (
-        <motion.div
-          ref={refScroll}
-          initial={{ width: 0 }}
-          animate={animation}
-          transition={{ duration: 2 }}
-          className="grid grid-cols-2 text-lg my-5"
-        >
-          <div className="br-arrow-right relative bg-red-600 text-white text-center py-4">
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={animationText}
-              transition={{ delay: 2 }}
-            >
-              Вибір
-            </motion.div>
-          </div>
-          <div className="bg-gray-100 text-center py-4">
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={animationText}
-              transition={{ delay: 2 }}
-            >
-              Бронювання
-            </motion.div>
-          </div>
-        </motion.div>
-      ) : (
-        <motion.div
-          ref={refScroll}
-          initial={{ width: 0 }}
-          animate={animation}
-          transition={{ duration: 2 }}
-          className="grid grid-cols-2 text-lg my-5"
-        >
-          <div className="br-arrow-right-white relative bg-gray-100 text-center py-4">
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={animationText}
-              transition={{ delay: 2 }}
-            >
-              Вибір
-            </motion.div>
-          </div>
-          <div className="bg-red-600 text-center text-white py-4">
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={animationText}
-              transition={{ delay: 2 }}
-            >
-              Бронювання
-            </motion.div>
-          </div>
-        </motion.div>
-      )}
     </article>
   );
 }

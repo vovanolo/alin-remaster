@@ -333,7 +333,27 @@
   }
 }
 
-.item {
+.border-button:focus {
+  animation: border-animate 1.6s linear;
+}
+
+@keyframes border-animate {
+  0% {
+    border-color: white;
+  }
+  40% {
+    border-top: 2px #e74c3c solid;
+  }
+
+  80% {
+    border-right: 2px #e74c3c solid;
+  }
+  100% {
+    border-left: 2px #e74c3c solid;
+  }
+}
+
+/* .item {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -352,4 +372,4 @@
   bottom: -15px;
   border: 4px solid white;
   border-radius: 10%;
-}
+} */
