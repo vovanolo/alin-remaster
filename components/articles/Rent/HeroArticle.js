@@ -5,7 +5,7 @@ import BreadCrumbs from "../../BreadCrumbs";
 import { useInView } from "react-intersection-observer";
 import { motion, useAnimation } from "framer-motion";
 
-export default function HeroSection() {
+export default function HeroArticle() {
   // Animation into scroll block]
   const [refScroll, intView] = useInView(); // { threshold: 0.1 }
   const animation = useAnimation();

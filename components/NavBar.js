@@ -6,6 +6,7 @@ import LocalPicker from "./LocalPicker";
 import useTranslation from "next-translate/useTranslation";
 import urls from "../urls";
 import logo from "../images/alin-logo.svg";
+import { useCallBackForm } from "./Context";
 
 function MobileNavBar({ changeHambOnClose }) {
   const router = useRouter();
@@ -208,6 +209,8 @@ export default function NavBar({ triggerToggleForm }) {
   const [hamburgerOnClose, setHamburgerOnClose] = useState(false);
   let { t } = useTranslation();
 
+  const callBackForm = useCallBackForm(); // Контекст для коллбек форми
+
   const handleWindowScroll = (e) => {
     if (window.scrollY >= 80) {
       setNavState(NavState.Active);
@@ -376,7 +379,7 @@ export default function NavBar({ triggerToggleForm }) {
           </div>
           <div className="flex items-center">
             <button
-              onClick={triggerToggleForm}
+              onClick={callBackForm.triggerToggleForm}
               className="bg-red-600 text-white text-sm md:text-base rounded-lg px-4 md:px-10 py-2.5 mx-5 main-button
               transform hover:scale-110 button transition duration-300"
             >

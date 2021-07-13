@@ -3,36 +3,9 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Callback from "./Callback";
 import CallbackForm from "./CallbackForm";
-import { useEffect, useState } from "react";
-
-const AnimationForm = {
-  backIn:
-    "relative bg-white w-full md:w-1/2 p-5 sm:p-10 container-form transition duration-700",
-  backOut:
-    "relative bg-white w-full md:w-1/2 p-5 sm:p-10 container-form-close transition duration-700",
-};
+import { CallBackFormProvider } from "./Context";
 
 export function MainLayout({ children, title }) {
-  const [callBackFormOnClose, setCallBackFormOnClose] = useState(false); // Callback form On or Close
-  // Animation CallBackForm backIn or backOut
-  const [callBackFormAnim, setCallBackFormAnim] = useState(
-    AnimationForm.backIn
-  );
-  const [isBlock, setIsBlock] = useState("none");
-
-  const triggerToggleForm = () => {
-    setCallBackFormOnClose(!callBackFormOnClose);
-    if (callBackFormOnClose) {
-      setCallBackFormAnim(AnimationForm.backOut);
-      setTimeout(() => {
-        setIsBlock("none");
-      }, 1000);
-    } else {
-      setCallBackFormAnim(AnimationForm.backIn);
-      setIsBlock("flex");
-    }
-  };
-
   return (
     <div className="wrapper">
       <Head>
@@ -42,15 +15,11 @@ export function MainLayout({ children, title }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <NavBar triggerToggleForm={triggerToggleForm} />
-
-      <CallbackForm
-        triggerToggleForm={triggerToggleForm}
-        callBackFormAnim={callBackFormAnim}
-        isBlock={isBlock}
-      />
-
-      <main className="text-gray-700 mt-24">{children}</main>
+      <CallBackFormProvider>
+        <NavBar />
+        <CallbackForm />
+        <main className="text-gray-700 mt-24">{children}</main>{" "}
+      </CallBackFormProvider>
 
       <Callback />
 

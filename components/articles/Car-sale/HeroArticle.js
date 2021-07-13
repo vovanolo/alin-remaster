@@ -8,8 +8,10 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useAnimation } from "framer-motion";
+import { useCallBackForm } from "../../Context";
 
-export default function HeroSection({ triggerToggleForm }) {
+export default function HeroArticle({ triggerToggleForm }) {
+  const callBackForm = useCallBackForm(); // Контекст для коллбек форми
   // Animation into scroll block]
   const [refScroll, intView] = useInView({ threshold: 0.4 }); // { threshold: 0.1 }
   const animation = useAnimation();
@@ -194,7 +196,7 @@ export default function HeroSection({ triggerToggleForm }) {
               </li>
             </ul>
             <button
-              onClick={triggerToggleForm}
+              onClick={callBackForm.triggerToggleForm}
               className="w-full rounded-lg bg-red-600 text-white px-7 py-2 mt-5 
           hover:bg-red-800 focus:outline-none transition duration-300"
             >
@@ -318,7 +320,7 @@ export default function HeroSection({ triggerToggleForm }) {
               </li>
             </ul>
             <button
-              onClick={triggerToggleForm}
+              onClick={callBackForm.triggerToggleForm}
               className="w-full rounded-lg bg-red-600 text-white px-7 py-2 mt-5 
           hover:bg-red-800 focus:outline-none transition duration-300"
             >

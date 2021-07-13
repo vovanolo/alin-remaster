@@ -1,10 +1,10 @@
 import { MainLayout } from "../../components/MainLayout";
-import HeroSection from "../../components/sections/Rent/HeroSection";
+import HeroArticle from "../../components/articles/Rent/HeroArticle";
 
 export default function Rent() {
   return (
     <MainLayout>
-      <HeroSection />
+      <HeroArticle />
     </MainLayout>
   );
 }

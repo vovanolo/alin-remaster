@@ -1,4 +1,5 @@
-import Image from "next/dist/client/image";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
 import urls from "../../../urls";
@@ -9,6 +10,7 @@ import ReservForm from "../../ReservForm";
 import { useFormik, useFormikContext } from "formik";
 
 export default function HeroSection() {
+  const [submitButtonActive, setSubmitButtonActive] = useState(false);
   // Animation into scroll block]
   const [refScroll, intView] = useInView(); // { threshold: 0.1 }
   const animation = useAnimation();
@@ -67,7 +69,7 @@ export default function HeroSection() {
   };
 
   return (
-    <article className="container-main mx-auto px-4 xl:px-0">
+    <article ref={refScroll} className="container-main mx-auto px-4 xl:px-0">
       <BreadCrumbs crumbs={crumbs} selected={selected} />
       <h1 className="text-4xl">Бронирование автомобиля</h1>
       <section className="flex flex-wrap">
@@ -114,9 +116,52 @@ export default function HeroSection() {
               <span>74</span>€
             </p>
           </div>
-          <div className="my-5"></div>
+          <div className="my-5">
+            <label className="flex items-center text-gray-500 text-base cursor-pointer">
+              <span>Я согласен с условиями проката</span>
+              <input
+                onClick={() => setSubmitButtonActive(!submitButtonActive)}
+                className="ml-4 cursor-pointer"
+                type="checkbox"
+              />
+            </label>
+            <Link href={"/"}>
+              <a className="text-blue-800">Ознакомиться с условиями проката</a>
+            </Link>
+          </div>
+          <button
+            className={
+              submitButtonActive
+                ? "bg-red-600 text-white rounded-lg px-10 py-2 mr-3"
+                : "bg-red-600 text-white rounded-lg px-10 py-2 mr-3 line-through cursor-not-allowed pointer-events-none"
+            }
+            type="submit"
+          >
+            Бронировать
+          </button>
         </div>
       </section>
+      <motion.div
+        initial={{ width: 0 }}
+        animate={animation}
+        transition={{ duration: 1 }}
+        className="container-main mx-auto -inset-x-4 fixed bottom-0 bg-red-600 rounded-t-xl flex justify-between text-white text-lg px-7 py-3 z-10"
+      >
+        <motion.strong
+          initial={{ opacity: 0, scale: 0 }}
+          animate={animationText}
+          transition={{ delay: 1 }}
+        >
+          Підсумок:
+        </motion.strong>
+        <motion.p
+          initial={{ opacity: 0, scale: 0 }}
+          animate={animationText}
+          transition={{ delay: 1 }}
+        >
+          <span>74</span>€
+        </motion.p>
+      </motion.div>
     </article>
   );
 }

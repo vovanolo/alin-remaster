@@ -8,7 +8,7 @@ import { useInView } from "react-intersection-observer";
 import { useAnimation } from "framer-motion";
 import { useEffect } from "react";
 
-export default function HeroSection() {
+export default function HeroArticle() {
   // Animation into scroll block]
   const [ref, intView] = useInView({ threshold: 0.3 }); // { threshold: 0.1 }
   const animationCar = useAnimation();

@@ -1,19 +1,18 @@
 import { useRef, useState } from "react";
 import { Formik } from "formik";
+import { useCallBackForm } from "./Context";
 
-export default function CallbackForm({
-  triggerToggleForm,
-  callBackFormAnim,
-  isBlock,
-}) {
+export default function CallbackForm() {
+  const callBackForm = useCallBackForm();
+
   return (
     <section
       className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center px-4 md:px-0 z-40"
-      style={{ display: isBlock }}
+      style={{ display: callBackForm.visible }}
     >
-      <div className={callBackFormAnim}>
+      <div className={callBackForm.callBackFormAnim}>
         <button
-          onClick={triggerToggleForm}
+          onClick={callBackForm.triggerToggleForm}
           className="absolute top-0 right-0 text-3xl text-gray-700 px-4 py-1 focus:outline-none"
         >
           x

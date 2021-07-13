@@ -7,6 +7,9 @@ import svgArrow from "../images/circle_switch.svg";
 import DatePicker from "react-datepicker";
 import svgClanendar from "../images/calendar.svg";
 import svgBackInTime from "../images/back-in-time.svg";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useAnimation } from "framer-motion";
 // import { FormContext } from "./Context";
 
 let schema = yup.object().shape({
@@ -16,8 +19,61 @@ let schema = yup.object().shape({
 });
 
 export default function ReservForm() {
+  // Animation into scroll block]
+  const [refScroll, intView] = useInView(); // { threshold: 0.1 }
+  const animationLeft = useAnimation();
+  const animationRight = useAnimation();
+  const animationLeftTwo = useAnimation();
+  const animationRightTwo = useAnimation();
+  const animationSpin = useAnimation();
+
+  useEffect(() => {
+    if (intView) {
+      animationLeft.start({
+        x: "0",
+      });
+
+      animationRight.start({
+        x: "0",
+      });
+
+      animationLeftTwo.start({
+        opacity: 1,
+        scale: 1,
+      });
+
+      animationRightTwo.start({
+        opacity: 1,
+        scale: 1,
+      });
+
+      animationSpin.start({
+        rotate: 0,
+      });
+    }
+    if (!intView) {
+      animationLeft.start({ x: "400%" });
+
+      animationRight.start({ x: "-400%" });
+
+      animationLeftTwo.start({
+        opacity: 0,
+        scale: 0,
+      });
+
+      animationRightTwo.start({
+        opacity: 0,
+        scale: 0,
+      });
+
+      animationSpin.start({
+        rotate: [0, 30, 40, 80, 360],
+      });
+    }
+  }, [intView]);
+
   //   let initinalPrice = 74;
-  //   const [totalPrice, setTotalPrice] = useState(initinalPrice);
+  // const [totalPrice, setTotalPrice] = useState(74);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState(new Date());
   const [selectedDateBack, setSelectedDateBack] = useState(new Date());
@@ -59,16 +115,31 @@ export default function ReservForm() {
         >
           {/* Choose Date and Time */}
           <h2 className="text-2xl mt-10">Настройка бронирования</h2>
-          <div className="relative grid lg:grid-cols-2 gap-5 my-5">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-90 lg:rotate-0">
-              <Image src={svgArrow} width={60} height={60} />
+          <div
+            ref={refScroll}
+            className="relative grid lg:grid-cols-2 gap-5 my-5"
+          >
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-90 lg:rotate-0 z-10">
+              <motion.div
+                initial={{ rotate: 0 }}
+                animate={animationSpin}
+                transition={{ duration: 2 }}
+              >
+                <Image src={svgArrow} width={60} height={60} />
+              </motion.div>
             </div>
-            <div className="border border-gray-400 rounded-xl px-7 py-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={animationLeftTwo}
+              transition={{ duration: 1 }}
+              style={{ transform: "none" }}
+              className="border border-gray-400 rounded-xl px-7 py-4"
+            >
               <div>
                 <label className="text-gray-500 text-lg">
                   Выберите дату подачи
                 </label>
-                <div className="relative flex">
+                <div className="relative flex z-20 md:z-20 lg:z-0">
                   <DatePicker
                     selected={selectedDate}
                     onChange={(date) => setSelectedDate(date)}
@@ -102,13 +173,18 @@ export default function ReservForm() {
                 </div>
                 <label className="text-gray-500 text-lg">выберите время</label>
               </div>
-            </div>
-            <div className="border border-gray-400 rounded-xl px-7 py-4">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={animationRightTwo}
+              transition={{ duration: 1 }}
+              className="border border-gray-400 rounded-xl px-7 py-4"
+            >
               <div>
                 <label className="text-gray-500 text-lg">
                   Выберите дату возвращения
                 </label>
-                <div className="relative flex">
+                <div className="relative flex z-20 md:z-20 lg:z-0">
                   <DatePicker
                     selected={selectedDateBack}
                     onChange={(date) => setSelectedDateBack(date)}
@@ -142,15 +218,26 @@ export default function ReservForm() {
                 </div>
                 <label className="text-gray-500 text-lg">выберите время</label>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Select location */}
-          <div className="relative grid lg:grid-cols-2 gap-5 my-5">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-90 lg:rotate-0">
-              <Image src={svgArrow} width={60} height={60} />
+          <div className="relative grid lg:grid-cols-2 gap-5 my-5 overflow-hidden">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-90 lg:rotate-0 z-10">
+              <motion.div
+                initial={{ rotate: 0 }}
+                animate={animationSpin}
+                transition={{ duration: 2 }}
+              >
+                <Image src={svgArrow} width={60} height={60} />
+              </motion.div>
             </div>
-            <div className="border border-gray-400 rounded-xl px-7 py-4">
+            <motion.div
+              initial={{ x: "400%" }}
+              animate={animationRight}
+              transition={{ duration: 1 }}
+              className="border border-gray-400 rounded-xl px-7 py-4"
+            >
               <label className="text-gray-500 text-lg">Подача</label>
               <Field
                 className="cursor-pointer w-full bg-white border px-4 py-2 hover:text-red-600 focus:outline-none"
@@ -174,8 +261,13 @@ export default function ReservForm() {
                 </option>
               </Field>
               <label className="text-gray-500 text-base">Город, страна</label>
-            </div>
-            <div className="border border-gray-400 rounded-xl px-7 py-4">
+            </motion.div>
+            <motion.div
+              initial={{ x: "-400%" }}
+              animate={animationLeft}
+              transition={{ duration: 1 }}
+              className="border border-gray-400 rounded-xl px-7 py-4"
+            >
               <label className="text-gray-500 text-lg">Возвращение</label>
               <Field
                 className="cursor-pointer w-full bg-gray-400 bg-opacity-25 border px-4 py-2 hover:text-red-600 focus:outline-none pointer-events-none"
@@ -200,7 +292,7 @@ export default function ReservForm() {
                 </option>
               </Field>
               <label className="text-gray-500 text-base">Город, страна</label>
-            </div>
+            </motion.div>
           </div>
 
           {/* Checkboxs */}

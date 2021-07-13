@@ -1,10 +1,10 @@
 import { MainLayout } from "../components/MainLayout";
-import HeroSection from "../components/sections/LoyaltyProgram/HeroSection";
+import HeroArticle from "../components/articles/LoyaltyProgram/HeroArticle";
 
 export default function loyaltyProgram() {
   return (
     <MainLayout title="Программа лояльности - аренда автомобилей | Alin Rent a car">
-      <HeroSection />
+      <HeroArticle />
     </MainLayout>
   );
 }
