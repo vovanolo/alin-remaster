@@ -8,8 +8,16 @@ import { useInView } from "react-intersection-observer";
 import { motion, useAnimation } from "framer-motion";
 import ReservForm from "../../ReservForm";
 import { useFormik, useFormikContext } from "formik";
+import { number } from "yup/lib/locale";
 
 export default function HeroSection() {
+  const [date, setDate] = useState(new Date("dd.MM.yyyy"));
+  const [time, setTime] = useState(new Date("HH.mm"));
+  const [dateComeBack, setDateComeBack] = useState(new Date("dd.MM.yyyy"));
+  const [timeComeBack, setTimeComeBack] = useState(new Date("HH.mm"));
+  const [locationFrom, setLocationFrom] = useState("");
+  const [checked, setChecked] = useState([]);
+  // const [totalPrice, setTotalPrice] = useState(0);
   const [submitButtonActive, setSubmitButtonActive] = useState(false);
   // Animation into scroll block]
   const [refScroll, intView] = useInView(); // { threshold: 0.1 }
@@ -73,7 +81,14 @@ export default function HeroSection() {
       <BreadCrumbs crumbs={crumbs} selected={selected} />
       <h1 className="text-4xl">Бронирование автомобиля</h1>
       <section className="flex flex-wrap">
-        <ReservForm />
+        <ReservForm
+          setDate={setDate}
+          setTime={setTime}
+          setDateComeBack={setDateComeBack}
+          setTimeComeBack={setTimeComeBack}
+          setLocationFrom={setLocationFrom}
+          setChecked={setChecked}
+        />
         <div className="w-full md:w-1/2 lg:w-4/12 md:pl-4">
           <h2 className="text-2xl">Jeep Cherokee</h2>
           <img
@@ -88,18 +103,46 @@ export default function HeroSection() {
             <div className="w-9/12">
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <b>Подача :</b>
+                  <b>Подача:</b>
+                  <p>{locationFrom}</p>
                 </div>
                 <div>
-                  <span>2021-07-12</span>o<span>11:53</span>
+                  <span>
+                    {date.toLocaleString(router.locale, {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </span>
+                  o
+                  <span>
+                    {time.toLocaleString(router.locale, {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <b>Возвращение :</b>
+                  <b>Возвращение:</b>
+                  <p>{locationFrom}</p>
                 </div>
                 <div>
-                  <span>2021-07-13</span>о<span>11:53</span>
+                  <span>
+                    {dateComeBack.toLocaleString(router.locale, {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </span>
+                  о
+                  <span>
+                    {timeComeBack.toLocaleString(router.locale, {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
                 </div>
               </div>
             </div>

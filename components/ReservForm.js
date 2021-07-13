@@ -18,7 +18,7 @@ let schema = yup.object().shape({
   reserv_email: yup.string().required().email(),
 });
 
-export default function ReservForm() {
+export default function ReservForm(props) {
   // Animation into scroll block]
   const [refScroll, intView] = useInView(); // { threshold: 0.1 }
   const animationLeft = useAnimation();
@@ -84,7 +84,7 @@ export default function ReservForm() {
   return (
     <Formik
       initialValues={{
-        locationFrom: "",
+        locationFrom: "Львів",
         reserv_name: "",
         reserv_phone: "",
         reserv_email: "",
@@ -145,6 +145,7 @@ export default function ReservForm() {
                     dateFormat={"dd.MM.yyyy"}
                     minDate={new Date()}
                     filterDate={(date) => date.getDay() === 4}
+                    value={props.setDate(selectedDate)}
                     className="text-black cursor-pointer w-full mt-2 bg-transparent focus:outline-none removeDefaultIcon"
                   />
                   <span className="cursor-pointer absolute right-0 mt-2 pointer-events-none">
@@ -163,7 +164,7 @@ export default function ReservForm() {
                     showTimeInput
                     minTime={new Date()}
                     filterTime={new Date()}
-                    value={values.time}
+                    value={props.setTime(selectedTime)}
                     className="text-black cursor-pointer w-full mt-2 bg-transparent focus:outline-none removeDefaultIcon"
                   />
                   <span className="cursor-pointer absolute right-0 mt-2 pointer-events-none">
@@ -185,6 +186,7 @@ export default function ReservForm() {
                     dateFormat={"dd.MM.yyyy"}
                     minDate={new Date()}
                     filterDate={(date) => date.getDay() === 4}
+                    value={props.setDateComeBack(selectedDateBack)}
                     className="text-black cursor-pointer w-full mt-2 bg-transparent focus:outline-none removeDefaultIcon"
                   />
                   <span className="cursor-pointer absolute right-0 mt-2 pointer-events-none">
@@ -203,7 +205,7 @@ export default function ReservForm() {
                     showTimeInput
                     minTime={new Date()}
                     filterTime={new Date()}
-                    value={values.time}
+                    value={props.setTimeComeBack(selectedTimeBack)}
                     className="text-black cursor-pointer w-full mt-2 bg-transparent focus:outline-none removeDefaultIcon"
                   />
                   <span className="cursor-pointer absolute right-0 mt-2 pointer-events-none">
@@ -232,6 +234,7 @@ export default function ReservForm() {
                 className="cursor-pointer w-full bg-white border px-4 py-2 hover:text-red-600 focus:outline-none"
                 name="locationFrom"
                 as="select"
+                value={props.setLocationFrom(values.locationFrom)}
               >
                 <option className="text-white bg-gray-800" value="Львов">
                   Львов
