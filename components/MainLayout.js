@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Callback from "./Callback";
 import CallbackForm from "./CallbackForm";
-import { CallBackFormProvider } from "./Context";
+import { CallBackFormProvider, FormContextDateProvider } from "./Context";
 
 export function MainLayout({ children, title }) {
   return (
@@ -18,7 +18,9 @@ export function MainLayout({ children, title }) {
       <CallBackFormProvider>
         <NavBar />
         <CallbackForm />
-        <main className="text-gray-700 mt-24">{children}</main>{" "}
+        <FormContextDateProvider>
+          <main className="text-gray-700 mt-24">{children}</main>
+        </FormContextDateProvider>
       </CallBackFormProvider>
 
       <Callback />

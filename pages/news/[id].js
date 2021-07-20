@@ -1,10 +1,14 @@
 import { MainLayout } from "../../components/MainLayout";
 import NewSections from "../../components/NewSections";
+import Loader from "../../components/Loader";
+import { useRouter } from "next/router";
 
 export default function New({ dataNew }) {
+  const router = useRouter();
+
   return (
     <MainLayout title={dataNew.title}>
-      <NewSections dataNew={dataNew} />
+      {router.isFallback ? <Loader /> : <NewSections dataNew={dataNew} />}
     </MainLayout>
   );
 }

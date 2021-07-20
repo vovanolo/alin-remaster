@@ -15,12 +15,6 @@ export const getStaticProps = async ({ locale }) => {
   );
   const dataTransferNews = await res.json();
 
-  if (!dataTransferNews) {
-    return {
-      notFound: true,
-    };
-  }
-
   return {
     props: { transfersNews: dataTransferNews },
   };

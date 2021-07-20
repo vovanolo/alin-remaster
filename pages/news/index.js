@@ -1,10 +1,13 @@
 import { MainLayout } from "../../components/MainLayout";
 import NewsSection from "../../components/NewsSection";
+import Loader from "../../components/Loader";
+import { useRouter } from "next/router";
 
 export default function index({ news }) {
+  const router = useRouter();
   return (
     <MainLayout title="News">
-      <NewsSection news={news} />
+      {router.isFallback ? <Loader /> : <NewsSection news={news} />}
     </MainLayout>
   );
 }
@@ -32,6 +35,6 @@ export async function getStaticProps({ locale }) {
   }
 
   return {
-    props: { news: dataNews },
+    props: { news: dataNews, fallback: true },
   };
 }

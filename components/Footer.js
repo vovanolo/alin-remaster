@@ -1,7 +1,9 @@
+import urls from "../urls";
 import Link from "next/link";
 import Image from "next/image";
 import email from "../../alin-remaster/images/email.svg";
 import phone from "../../alin-remaster/images/phone.svg";
+
 export default function Footer() {
   return (
     <footer className="bg-gray-100">
@@ -46,7 +48,7 @@ export default function Footer() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   ></path>
-                </svg>{" "}
+                </svg>
               </a>
               <a
                 href="https://www.facebook.com/alin_services_for_you-107208224245653"
@@ -68,7 +70,7 @@ export default function Footer() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   ></path>
-                </svg>{" "}
+                </svg>
               </a>
               <a
                 href="https://youtube.com/channel/UCNaXUlv5bmiLd3DKzJ_pt9w"
@@ -95,90 +97,72 @@ export default function Footer() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   ></path>
-                </svg>{" "}
+                </svg>
               </a>
             </div>
           </div>
 
           <ul className="text-lg font-medium lg:flex">
             <li role="presentation" className="child-active ">
-              <a href="#" className=" text-red-600  cursor-pointer perent-link">
-                Послуги
-              </a>
+              <Link href="#">
+                <a className="text-red-600 cursor-pointer perent-link">
+                  Послуги
+                </a>
+              </Link>
 
               <ul className="text-base">
-                {" "}
                 <li role="presentation" className="  my-2">
-                  <a
-                    href="https://alin.ua/rent-with-driver"
-                    className=" hover:text-red-600"
-                  >
-                    Трансфери
-                  </a>
+                  <Link href={urls.rentWithDriver}>
+                    <a className=" hover:text-red-600">Трансфери</a>
+                  </Link>
                 </li>
                 <li role="presentation" className="  my-2">
-                  <a
-                    href="https://alin.ua/assistance"
-                    className=" hover:text-red-600"
-                  >
-                    Асистенс
-                  </a>
+                  <Link href={urls.assistance}>
+                    <a className=" hover:text-red-600">Асистенс</a>
+                  </Link>
                 </li>
                 <li role="presentation" className="  my-2">
-                  <a
-                    href="https://alin.ua/contacts"
-                    className="hover:text-red-600"
-                  >
-                    Контакти
-                  </a>
+                  <Link href={urls.contacts}>
+                    <a className="hover:text-red-600">Контакти</a>
+                  </Link>
                 </li>
                 <li role="presentation" className="  my-2">
-                  <a
-                    href="https://alin.ua/car-sale"
-                    className=" hover:text-red-600"
-                  >
-                    Автовикуп
-                  </a>
+                  <Link href={urls.carSale}>
+                    <a className=" hover:text-red-600">Автовикуп</a>
+                  </Link>
                 </li>
               </ul>
             </li>
           </ul>
           <ul className="text-lg font-medium lg:flex">
-            <li role="presentation" className=" ">
-              <a href="#" className=" text-red-600  cursor-pointer perent-link">
-                Про компанію
-              </a>
-
+            <li role="presentation">
+              <Link href={urls.about}>
+                <a className=" text-red-600  cursor-pointer perent-link">
+                  Про компанію
+                </a>
+              </Link>
               <ul className="text-base">
-                {" "}
                 <li role="presentation" className="  my-2">
-                  <a
-                    href="https://alin.ua/rent-conditions"
-                    className=" hover:text-red-600"
-                  >
-                    Умови оренди
-                  </a>
+                  <Link href={urls.rentConditions}>
+                    <a className=" hover:text-red-600">Умови оренди</a>
+                  </Link>
+                </li>
+                <li role="presentation" className="my-2">
+                  <Link href={urls.about}>
+                    <a className=" hover:text-red-600">Про нас</a>
+                  </Link>
                 </li>
                 <li role="presentation" className="  my-2">
-                  <a
-                    href="https://alin.ua/about-us"
-                    className=" hover:text-red-600"
-                  >
-                    Про нас
-                  </a>
+                  <Link href={urls.faq}>
+                    <a className=" hover:text-red-600">Часті запитання</a>
+                  </Link>
                 </li>
                 <li role="presentation" className="  my-2">
-                  <a href="https://alin.ua/faq" className=" hover:text-red-600">
-                    Часті запитання
-                  </a>
-                </li>
-                <li role="presentation" className="  my-2">
-                  <a
-                    href="https://alin.ua/confidential-policy"
-                    className=" hover:text-red-600"
-                  >
-                    Політика конфіденційності
-                  </a>
+                  <Link href={urls.confidentialPolicy}>
+                    <a className=" hover:text-red-600">
+                      Політика конфіденційності
+                    </a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -190,7 +174,6 @@ export default function Footer() {
               </a>
 
               <ul className="text-base">
-                {" "}
                 <li role="presentation" className="flex items-center my-2">
                   <Image src={email} height={17} width={17} />
                   <a

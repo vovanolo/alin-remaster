@@ -10,7 +10,7 @@ import { useInView } from "react-intersection-observer";
 import { useAnimation } from "framer-motion";
 import { useCallBackForm } from "../../Context";
 
-export default function HeroArticle({ triggerToggleForm }) {
+export default function HeroArticle() {
   const callBackForm = useCallBackForm(); // Контекст для коллбек форми
   // Animation into scroll block]
   const [refScroll, intView] = useInView({ threshold: 0.4 }); // { threshold: 0.1 }

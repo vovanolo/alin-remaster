@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { Formik } from "formik";
+import React, { useEffect, useRef, useState } from "react";
+import { Formik, useFormik } from "formik";
 import { useCallBackForm } from "./Context";
 
 export default function CallbackForm() {
@@ -11,12 +11,6 @@ export default function CallbackForm() {
       style={{ display: callBackForm.visible }}
     >
       <div className={callBackForm.callBackFormAnim}>
-        <button
-          onClick={callBackForm.triggerToggleForm}
-          className="absolute top-0 right-0 text-3xl text-gray-700 px-4 py-1 focus:outline-none"
-        >
-          x
-        </button>
         <Formik
           initialValues={{ cb_name: "", cb_phone: "" }}
           validate={(values) => {
@@ -33,7 +27,7 @@ export default function CallbackForm() {
               resetForm({});
               alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
-              triggerToggleForm();
+              callBackForm.triggerToggleForm();
             }, 400);
           }}
         >
@@ -45,48 +39,57 @@ export default function CallbackForm() {
             handleBlur,
             handleSubmit,
             isSubmitting,
+            resetForm,
             /* and other goodies */
           }) => (
-            <form onSubmit={handleSubmit} className="form-anim mt-4">
-              <h2 className="text-2xl text-gray-700">
-                Оставьте свой номер и мы вам перезвоним!
-              </h2>
-              <div className="my-4">
-                <input
-                  type="text"
-                  name="cb_name"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.cb_name}
-                  className="w-full border-2 px-3 py-1"
-                  placeholder="Имя"
-                />
-                <p className="text-red-600">
-                  {errors.cb_name && touched.cb_name && errors.cb_name}
-                </p>
-              </div>
-              <div className="my-4">
-                <input
-                  type="text"
-                  name="cb_phone"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.cb_phone}
-                  className="w-full border-2 px-3 py-1"
-                  placeholder="Телефон"
-                />
-                <p className="text-red-600">
-                  {errors.cb_phone && touched.cb_phone && errors.cb_phone}
-                </p>
-              </div>
+            <React.Fragment>
               <button
-                type="submit"
-                disabled={isSubmitting}
-                className="transition duration-500 ease-in-out block bg-red-600 hover:bg-red-500 rounded-xl text-white text-lg font-bold text-center main-button px-5 py-2 mt-4 focus:outline-none"
+                onClick={callBackForm.triggerToggleForm}
+                className="absolute top-0 right-0 text-3xl text-gray-700 px-4 py-1 focus:outline-none"
               >
-                Отправить
+                x
               </button>
-            </form>
+              <form onSubmit={handleSubmit} className="form-anim mt-4">
+                <h2 className="text-2xl text-gray-700">
+                  Оставьте свой номер и мы вам перезвоним!
+                </h2>
+                <div className="my-4">
+                  <input
+                    type="text"
+                    name="cb_name"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.cb_name}
+                    className="w-full border-2 px-3 py-1"
+                    placeholder="Имя"
+                  />
+                  <p className="text-red-600">
+                    {errors.cb_name && touched.cb_name && errors.cb_name}
+                  </p>
+                </div>
+                <div className="my-4">
+                  <input
+                    type="text"
+                    name="cb_phone"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.cb_phone}
+                    className="w-full border-2 px-3 py-1"
+                    placeholder="Телефон"
+                  />
+                  <p className="text-red-600">
+                    {errors.cb_phone && touched.cb_phone && errors.cb_phone}
+                  </p>
+                </div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="transition duration-500 ease-in-out block bg-red-600 hover:bg-red-500 rounded-xl text-white text-lg font-bold text-center main-button px-5 py-2 mt-4 focus:outline-none"
+                >
+                  Отправить
+                </button>
+              </form>
+            </React.Fragment>
           )}
         </Formik>
       </div>

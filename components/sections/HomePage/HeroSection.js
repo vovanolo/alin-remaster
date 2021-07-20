@@ -3,12 +3,15 @@ import windrose from "../../../images/thumb__720_704_0_0_crop.png";
 import mainImage from "../../../images/thumb__634_394_0_0_crop.png";
 import svgClanendar from "../../../images/calendar.svg";
 import svgBackInTime from "../../../images/back-in-time.svg";
-import { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useAnimation } from "framer-motion";
 // import { FormContext } from "../../Context";
 import DatePicker from "react-datepicker";
+import { useFormContextDate } from "../../Context";
+import { useRouter } from "next/router";
+import { set } from "nprogress";
 
 const AnimationSelect = {
   inactive:
@@ -18,10 +21,13 @@ const AnimationSelect = {
 };
 
 export default function HeroSection() {
+  const router = useRouter();
   const [isOpensection, setIsOpensection] = useState(AnimationSelect.inactive);
   const [tf, setTf] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState(new Date());
+  const [startDate, setStartDate] = useFormContextDate();
+
   // Animation into scroll block]
   const [refScroll, intView] = useInView(); // { threshold: 0.1 }
   const animationCar = useAnimation();
@@ -155,10 +161,10 @@ export default function HeroSection() {
                 <div className="flex flex-row relative">
                   <DatePicker
                     selected={selectedDate}
-                    onChange={(date) => setSelectedDate(date)}
+                    onChange={(date) => console.log(date)}
                     dateFormat={"dd.MM.yyyy"}
                     minDate={new Date()}
-                    filterDate={(date) => date.getDay() === 4}
+                    // filterDate={(date) => date.getDay() === 4}
                     className="text-black cursor-pointer w-full bg-transparent focus:outline-none removeDefaultIcon"
                   />
                   <span className="absolute right-0 px-2 py-0.5 pointer-events-none">
@@ -205,6 +211,11 @@ export default function HeroSection() {
             </div>
           </motion.div>
           <motion.button
+            onClick={() =>
+              router.push("/reserv/mustang", "/reserv/mustang", {
+                locale: router.locale,
+              })
+            }
             whileTap={{ scale: 1.2 }}
             className="bg-red-600 text-white text-lg rounded-lg w-full py-4 hover:bg-red-500 focus:outline-none"
           >

@@ -48,7 +48,8 @@ export default function RentWithDriverForm() {
         setTimeout(() => {
           resetForm({});
           alert(JSON.stringify(values, null, 2));
-          alert(selectedDate, selectedTime);
+          alert(selectedDate);
+          alert(selectedTime);
           setSubmitting(false);
         }, 400);
       }}
@@ -245,6 +246,7 @@ export default function RentWithDriverForm() {
           </motion.div>
 
           <button
+            type="submit"
             disabled={isSubmitting}
             className="absolute top-full right-10 transform -translate-y-1/2 bg-red-600 text-xl rounded-lg px-5 md:px-7 py-1"
           >

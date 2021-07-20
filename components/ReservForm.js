@@ -1,5 +1,4 @@
 import Image from "next/dist/client/image";
-import { useRouter } from "next/router";
 import { useRef, useEffect, useState, useContext, createContext } from "react";
 import { Formik, Field, Form } from "formik";
 import * as yup from "yup";
@@ -10,6 +9,7 @@ import svgBackInTime from "../images/back-in-time.svg";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useAnimation } from "framer-motion";
+import { useFormContextDate } from "./Context";
 // import { FormContext } from "./Context";
 
 let schema = yup.object().shape({
@@ -19,6 +19,14 @@ let schema = yup.object().shape({
 });
 
 export default function ReservForm(props) {
+  const [startDate, setStartDate] = useFormContextDate();
+  //   let initinalPrice = 74;
+  // const [totalPrice, setTotalPrice] = useState(74);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedTime, setSelectedTime] = useState(new Date());
+  const [selectedDateBack, setSelectedDateBack] = useState(new Date());
+  const [selectedTimeBack, setSelectedTimeBack] = useState(new Date());
+
   // Animation into scroll block]
   const [refScroll, intView] = useInView(); // { threshold: 0.1 }
   const animationLeft = useAnimation();
@@ -74,13 +82,6 @@ export default function ReservForm(props) {
     }
   }, [intView]);
 
-  //   let initinalPrice = 74;
-  // const [totalPrice, setTotalPrice] = useState(74);
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedTime, setSelectedTime] = useState(new Date());
-  const [selectedDateBack, setSelectedDateBack] = useState(new Date());
-  const [selectedTimeBack, setSelectedTimeBack] = useState(new Date());
-
   return (
     <Formik
       initialValues={{
@@ -112,6 +113,7 @@ export default function ReservForm(props) {
         /* and other goodies */
       }) => (
         <Form
+          id={props.nameForm}
           onSubmit={handleSubmit}
           className="w-full md:w-1/2 lg:w-8/12 md:pr-4"
         >
@@ -144,7 +146,7 @@ export default function ReservForm(props) {
                     onChange={(date) => setSelectedDate(date)}
                     dateFormat={"dd.MM.yyyy"}
                     minDate={new Date()}
-                    filterDate={(date) => date.getDay() === 4}
+                    // filterDate={(date) => date.getDay() === 4}
                     value={props.setDate(selectedDate)}
                     className="text-black cursor-pointer w-full mt-2 bg-transparent focus:outline-none removeDefaultIcon"
                   />
@@ -377,13 +379,13 @@ export default function ReservForm(props) {
           <div className="my-10">
             <div className="grid md:grid-cols-2 mb-7">
               <div className="md:col-span-2">
-                <label className="text-gray-500 text-base">Имя:</label>
+                <label className="text-gray-800 text-base">Имя:</label>
                 <Field
                   type="text"
                   name="reserv_name"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className="w-full border px-3.5 py-2.5"
+                  className="w-full border shadow-lg px-3.5 py-2.5 hover:bg-blue-800 hover:bg-opacity-10 focus:bg-blue-800 focus:bg-opacity-10 active:bg-blue-800 active:bg-opacity-10"
                   placeholder={
                     errors.reserv_name &&
                     touched.reserv_name &&
@@ -399,13 +401,13 @@ export default function ReservForm(props) {
 
               <div>
                 <div className="md:col-span-2">
-                  <label className="text-gray-500 text-base">Телефон:</label>
+                  <label className="text-gray-800 text-base">Телефон:</label>
                   <Field
                     type="text"
                     name="reserv_phone"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className="w-full border px-3.5 py-2.5"
+                    className="w-full border shadow-lg px-3.5 py-2.5 hover:bg-blue-800 hover:bg-opacity-10 focus:bg-blue-800 focus:bg-opacity-10 active:bg-blue-800 active:bg-opacity-10"
                     placeholder={
                       errors.reserv_phone &&
                       touched.reserv_phone &&
@@ -422,13 +424,13 @@ export default function ReservForm(props) {
 
               <div>
                 <div className="md:col-span-2 md:ml-8">
-                  <label className="text-gray-500 text-base">Email:</label>
+                  <label className="text-gray-800 text-base">Email:</label>
                   <Field
                     type="text"
                     name="reserv_email"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className="w-full border px-3.5 py-2.5"
+                    className="w-full border shadow-lg px-3.5 py-2.5 hover:bg-blue-800 hover:bg-opacity-10 focus:bg-blue-800 focus:bg-opacity-10 active:bg-blue-800 active:bg-opacity-10"
                     placeholder={
                       errors.reserv_email &&
                       touched.reserv_email &&
@@ -444,11 +446,11 @@ export default function ReservForm(props) {
               </div>
             </div>
             <div className="mb-10">
-              <label className="text-gray-500 text-base">Комментарий:</label>
+              <label className="text-gray-800 text-base">Комментарий:</label>
               <Field
                 type="text"
                 name="reserv_comment"
-                className="w-full h-40 border px-3.5 py-2.5"
+                className="w-full h-40 border shadow-lg px-3.5 py-2.5 hover:bg-blue-800 hover:bg-opacity-10 focus:bg-blue-800 focus:bg-opacity-10 active:bg-blue-800 active:bg-opacity-10"
                 as="textarea"
               />
             </div>

@@ -10,6 +10,8 @@ const urls = {
   about: "/about",
   news: "/news",
   contacts: "/contacts",
+  confidentialPolicy: "/confidential-policy",
+  rentConditions: "/rent-conditions",
 };
 
 export default urls;

@@ -49,12 +49,19 @@ export const CallBackFormProvider = ({ children }) => {
 };
 
 // Контекст для форми date
-export const FormContextDate = React.createContext(new Date());
+export const FormContextDate = React.createContext();
 
 export const useFormContextDate = () => {
   return useContext(FormContextDate);
 };
 
 export const FormContextDateProvider = ({ children }) => {
-  return <FormContextDate.Provider>{children}</FormContextDate.Provider>;
+  const [startDate, setStartDate] = useState(new Date());
+  const [locationFrom, setLocationFrom] = useState("Львів");
+
+  return (
+    <FormContextDate.Provider value={[startDate, setStartDate]}>
+      {children}
+    </FormContextDate.Provider>
+  );
 };

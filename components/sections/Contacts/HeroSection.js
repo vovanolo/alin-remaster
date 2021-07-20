@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import arrowContact from "../../../images/arrow_contacts.png";
 import { motion, AnimateSharedLayout, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import ContactForm from "../../ContactForm";
 
 const mapLocation = [
   {
@@ -34,7 +38,21 @@ const mapLocation = [
 
 export default function HeroSection() {
   const [isToggle, setIsToggle] = useState(0);
+  const [refScroll, intView] = useInView({ threshold: 0.3 }); // { threshold: 0.1 }
   const animation = useAnimation();
+
+  useEffect(() => {
+    if (intView) {
+      animation.start({
+        y: "0",
+        scaleY: 1,
+        width: "400px",
+      });
+    }
+    if (!intView) {
+      animation.start({ y: "-80%", scaleY: 0, width: "0" });
+    }
+  }, [intView]);
 
   const triggerToggle = (index) => {
     setIsToggle(index);
@@ -88,29 +106,45 @@ export default function HeroSection() {
           </div>
         ))}
       </div>
+      <div ref={refScroll} className="grid md:grid-cols-2 gap-7 my-20">
+        <div className="hidden md:block">
+          <h1 className="px-2 mb-4 text-2xl">Есть вопросы?</h1>
+          <motion.div
+            initial={{ y: "-80%", scaleY: 0, width: "0" }}
+            animate={animation}
+            transition={{ duration: 1.2 }}
+            className="md:pl-28 xl:pl-44"
+          >
+            <Image src={arrowContact} layout="intrinsic" />
+          </motion.div>
+        </div>
+        <div>
+          <ContactForm />
+        </div>
+      </div>
     </section>
   );
 }
 
-const spring = {
-  type: "spring",
-  stiffness: 500,
-  damping: 30,
-};
+// const spring = {
+//   type: "spring",
+//   stiffness: 500,
+//   damping: 30,
+// };
 
-function Item({ title, color, isSelected, onClick }) {
-  return (
-    <li className="item" onClick={onClick} style={{ backgroundColor: color }}>
-      {isSelected && (
-        <motion.button
-          layoutId="outline"
-          className="outline"
-          initial={false}
-          animate={{ borderColor: color }}
-          transition={spring}
-        ></motion.button>
-      )}
-      <p>{title}</p>
-    </li>
-  );
-}
+// function Item({ title, color, isSelected, onClick }) {
+//   return (
+//     <li className="item" onClick={onClick} style={{ backgroundColor: color }}>
+//       {isSelected && (
+//         <motion.button
+//           layoutId="outline"
+//           className="outline"
+//           initial={false}
+//           animate={{ borderColor: color }}
+//           transition={spring}
+//         ></motion.button>
+//       )}
+//       <p>{title}</p>
+//     </li>
+//   );
+// }

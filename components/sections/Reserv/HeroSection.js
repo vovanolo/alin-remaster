@@ -7,8 +7,9 @@ import BreadCrumbs from "../../BreadCrumbs";
 import { useInView } from "react-intersection-observer";
 import { motion, useAnimation } from "framer-motion";
 import ReservForm from "../../ReservForm";
-import { useFormik, useFormikContext } from "formik";
-import { number } from "yup/lib/locale";
+import { useFormik } from "formik";
+
+const nameForm = "data"; // Прив'язка форми і submit button
 
 export default function HeroSection() {
   const [date, setDate] = useState(new Date("dd.MM.yyyy"));
@@ -17,6 +18,7 @@ export default function HeroSection() {
   const [timeComeBack, setTimeComeBack] = useState(new Date("HH.mm"));
   const [locationFrom, setLocationFrom] = useState("");
   const [checked, setChecked] = useState([]);
+
   // const [totalPrice, setTotalPrice] = useState(0);
   const [submitButtonActive, setSubmitButtonActive] = useState(false);
   // Animation into scroll block]
@@ -88,6 +90,7 @@ export default function HeroSection() {
           setTimeComeBack={setTimeComeBack}
           setLocationFrom={setLocationFrom}
           setChecked={setChecked}
+          nameForm={nameForm}
         />
         <div className="w-full md:w-1/2 lg:w-4/12 md:pl-4">
           <h2 className="text-2xl">Jeep Cherokee</h2>
@@ -114,7 +117,7 @@ export default function HeroSection() {
                       day: "numeric",
                     })}
                   </span>
-                  o
+                  <span> о </span>
                   <span>
                     {time.toLocaleString(router.locale, {
                       hour: "2-digit",
@@ -136,7 +139,7 @@ export default function HeroSection() {
                       day: "numeric",
                     })}
                   </span>
-                  о
+                  <span> о </span>
                   <span>
                     {timeComeBack.toLocaleString(router.locale, {
                       hour: "2-digit",
@@ -168,20 +171,24 @@ export default function HeroSection() {
                 type="checkbox"
               />
             </label>
-            <Link href={"/"}>
+            <Link href={urls.confidentialPolicy}>
               <a className="text-blue-800">Ознакомиться с условиями проката</a>
             </Link>
           </div>
-          <button
+          <motion.button
+            whileTap={{ scale: 1.2, opacity: 0.5 }}
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.4 }}
             className={
               submitButtonActive
-                ? "bg-red-600 text-white rounded-lg px-10 py-2 mr-3"
-                : "bg-red-600 text-white rounded-lg px-10 py-2 mr-3 line-through cursor-not-allowed pointer-events-none"
+                ? "bg-red-600 text-white rounded-lg px-10 py-2 mr-3 focus:outline-none"
+                : "bg-red-600 text-white rounded-lg px-10 py-2 mr-3 line-through cursor-not-allowed pointer-events-none focus:outline-none"
             }
+            form={nameForm}
             type="submit"
           >
             Бронировать
-          </button>
+          </motion.button>
         </div>
       </section>
       <motion.div

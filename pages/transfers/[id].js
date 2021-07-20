@@ -1,7 +1,15 @@
 import { MainLayout } from "../../components/MainLayout";
 import NewSections from "../../components/NewSections";
+import Loader from "../../components/Loader";
+import { useRouter } from "next/router";
 
 export default function Transfer({ transfer }) {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <Loader />;
+  }
+
   return (
     <MainLayout title={transfer.title}>
       <NewSections transfer={transfer} />
@@ -36,6 +44,12 @@ export async function getStaticProps(context) {
     "https://alin-remaster.herokuapp.com/transfers/" + id
   );
   const dataTransferNews = await res.json();
+
+  if (dataTransferNews.length === 0) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: { transfer: dataTransferNews },
