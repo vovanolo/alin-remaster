@@ -21,3 +21,28 @@ footer {
   opacity: 0;
   cursor: pointer;
 }
+
+/* BreadCrumbs */
+.br-arrow-right::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 30px solid transparent;
+  border-left: 30px solid rgb(220, 38, 38);
+  border-bottom: 30px solid transparent;
+}
+
+.br-arrow-right-white::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 30px solid transparent;
+  border-left: 30px solid rgb(243, 244, 246);
+  border-bottom: 30px solid transparent;
+}

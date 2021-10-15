@@ -1,18 +1,7 @@
 import { MainLayout } from "../components/MainLayout";
-import HeroSection from "../components/section/HomePage/HeroSection";
+import HeroSection from "../components/sections/HomePage/HeroSection";
 import NewsSection from "../components/NewsSection";
-import TextSection from "../components/section/HomePage/TextSection";
-
-export const getStaticProps = async () => {
-  const res = await fetch(
-    "https://alin-ua-api.herokuapp.com/places?_start=1&_limit=3"
-  );
-  const dataNews = await res.json();
-
-  return {
-    props: { news: dataNews },
-  };
-};
+import TextSection from "../components/sections/HomePage/TextSection";
 
 export default function Home({ news }) {
   return (
@@ -23,3 +12,20 @@ export default function Home({ news }) {
     </MainLayout>
   );
 }
+
+export const getStaticProps = async ({locale}) => {
+  const res = await fetch(
+    `https://alin-remaster.herokuapp.com/advertises?_locale=${locale}`
+  );
+  const dataNews = await res.json();
+
+  if (!dataNews) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { news: dataNews },
+  };
+};

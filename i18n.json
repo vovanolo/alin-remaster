@@ -1,6 +1,6 @@
 {
-    "locales": ["ua", "en", "ru", "pl"],
-    "defaultLocale": "ua",
+    "locales": ["uk", "en", "ru", "pl"],
+    "defaultLocale": "uk",
     "pages": {
         "*": ["common"]
     }

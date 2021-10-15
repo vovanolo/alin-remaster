@@ -1,13 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import LocalPicker from "./LocalPicker";
 import useTranslation from "next-translate/useTranslation";
+import urls from "../urls";
+import logo from "../images/alin-logo.svg";
+import { useCallBackForm } from "./Context";
 
-function MobileBavbar() {
+function MobileNavBar({ changeHambOnClose }) {
+  const router = useRouter();
+  let currentUrl = router.route;
+
   return (
     <div className="block lg:hidden menu-wrap">
-      <input type="checkbox" className="toggler" />
+      <input
+        onClick={changeHambOnClose}
+        type="checkbox"
+        className="toggler z-10"
+      />
       <div className="hamburger">
         <div></div>
       </div>
@@ -37,7 +48,15 @@ function MobileBavbar() {
                 </div>
               </li>
               <li className="mb-0 md:mb-4  lg:mb-0 text-white hover:text-red-600 transition duration-300">
-                <a href={"/transfers"}>Трансфери</a>
+                <Link href={urls.rentWithDriver}>
+                  <a
+                    className={
+                      currentUrl === "/rentWithDriver" ? "text-red-600" : ""
+                    }
+                  >
+                    Трансфери
+                  </a>
+                </Link>
               </li>
               <li className="mb-0 md:mb-4  lg:mb-0 hover-trigger transition duration-300">
                 <p className="text-white hover:text-red-600 cursor-pointer">
@@ -46,18 +65,38 @@ function MobileBavbar() {
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border-2 text-base bg-white px-4 rounded-xl">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      <Link href={"/assistance"}>
-                        <a>Асистенс</a>
+                      <Link href={urls.assistance}>
+                        <a
+                          className={
+                            currentUrl === "/assistance" ? "text-red-600" : ""
+                          }
+                        >
+                          Асистенс
+                        </a>
                       </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      <Link href={"/additional-services"}>
-                        <a> Дополнительные услуги</a>
+                      <Link href={urls.additionalServices}>
+                        <a
+                          className={
+                            currentUrl === "/additional-services"
+                              ? "text-red-600"
+                              : ""
+                          }
+                        >
+                          Дополнительные услуги
+                        </a>
                       </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      <Link href={"/car-sale"}>
-                        <a>Автовикуп</a>
+                      <Link href={urls.carSale}>
+                        <a
+                          className={
+                            currentUrl === "/car-sale" ? "text-red-600" : ""
+                          }
+                        >
+                          Автовикуп
+                        </a>
                       </Link>
                     </li>
                   </ul>
@@ -70,24 +109,36 @@ function MobileBavbar() {
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border-2 text-base bg-white px-4 rounded-xl">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Программа лояльности
+                      <Link href={urls.loyaltyProgram}>
+                        <a>Программа лояльности</a>
+                      </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Faq
+                      <Link href={urls.faq}>
+                        <a>faq</a>
+                      </Link>
                     </li>
-                    <li className="hover:text-red-600 cursor-pointer my-2">
-                      О нас
-                    </li>
+                    <Link href={urls.about}>
+                      <a>О нас</a>
+                    </Link>
                   </ul>
                 </div>
               </li>
               <li className="mb-0 md:mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
-                <Link href={"/news"}>
-                  <a>Новости</a>
+                <Link href={urls.news}>
+                  <a className={currentUrl === "/news" ? "text-red-600" : ""}>
+                    Новости
+                  </a>
                 </Link>
               </li>
               <li className="mb-0 md:mb-4 lg:mb-0 text-white hover:text-red-600 transition duration-300">
-                <Link href={"/contacts"}>Контакти</Link>
+                <Link href={urls.contacts}>
+                  <a
+                    className={currentUrl === "/contacts" ? "text-red-600" : ""}
+                  >
+                    Контакти
+                  </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -99,6 +150,7 @@ function MobileBavbar() {
 
 const ThemeColors = {
   white: "white",
+  black: "black",
   none: "none",
   grey: "rgb(243, 244, 246)",
   dark: "rgb(55, 65, 81)",
@@ -109,30 +161,36 @@ const Theme = {
     inactive: {
       background: ThemeColors.none,
       text: ThemeColors.dark,
+      hamburgerColor: ThemeColors.black,
     },
     active: {
       background: ThemeColors.grey,
       text: ThemeColors.dark,
+      hamburgerColor: ThemeColors.black,
     },
   },
   other: {
     inactive: {
       background: ThemeColors.none,
       text: ThemeColors.white,
+      hamburgerColor: ThemeColors.white,
     },
     active: {
       background: ThemeColors.grey,
       text: ThemeColors.dark,
+      hamburgerColor: ThemeColors.black,
     },
   },
   greyOnly: {
     inactive: {
       background: ThemeColors.grey,
       text: ThemeColors.dark,
+      hamburgerColor: ThemeColors.black,
     },
     active: {
       background: ThemeColors.grey,
       text: ThemeColors.dark,
+      hamburgerColor: ThemeColors.black,
     },
   },
 };
@@ -148,7 +206,10 @@ export default function NavBar({ triggerToggleForm }) {
 
   const [theme, setTheme] = useState(Theme.default);
   const [navState, setNavState] = useState(NavState.Inactive);
+  const [hamburgerOnClose, setHamburgerOnClose] = useState(false);
   let { t } = useTranslation();
+
+  const callBackForm = useCallBackForm(); // Контекст для коллбек форми
 
   const handleWindowScroll = (e) => {
     if (window.scrollY >= 80) {
@@ -176,6 +237,10 @@ export default function NavBar({ triggerToggleForm }) {
     }
   }, [currentUrl]);
 
+  const changeHambOnClose = () => {
+    setHamburgerOnClose(!hamburgerOnClose);
+  };
+
   return (
     <nav style={{ color: theme[navState].text }}>
       <div
@@ -183,9 +248,13 @@ export default function NavBar({ triggerToggleForm }) {
         style={{ background: theme[navState].background }}
       >
         <div className="container-main mx-auto px-4 xl:px-0 flex justify-between">
-          <div className="flex">
+          <div className="flex z-10">
             <h1>
-              <Link href={"/"}>LOGO</Link>
+              <Link href={urls.home}>
+                <a>
+                  <Image src={logo} width={78} height={49} />
+                </a>
+              </Link>
             </h1>
           </div>
           <div className="flex-1 hidden w-10/12 lg:flex lg:w-auto items-center justify-end text-lg font-normal">
@@ -212,7 +281,15 @@ export default function NavBar({ triggerToggleForm }) {
                 </div>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <a href={"/transfers"}>Трансфери</a>
+                <Link href={urls.rentWithDriver}>
+                  <a
+                    className={
+                      currentUrl === "/rentWithDriver" ? "text-red-600" : ""
+                    }
+                  >
+                    Трансфери
+                  </a>
+                </Link>
               </li>
               <li className="mb-4 lg:mb-0 transition duration-300 hover-trigger">
                 <p className="hover:text-red-600 cursor-pointer">
@@ -221,18 +298,38 @@ export default function NavBar({ triggerToggleForm }) {
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border text-base text-gray-700 bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      <Link href={"/assistance"}>
-                        <a>Асистенс</a>
+                      <Link href={urls.assistance}>
+                        <a
+                          className={
+                            currentUrl === "/assistance" ? "text-red-600" : ""
+                          }
+                        >
+                          Асистенс
+                        </a>
                       </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      <Link href={"/additional-services"}>
-                        <a> Дополнительные услуги</a>
+                      <Link href={urls.additionalServices}>
+                        <a
+                          className={
+                            currentUrl === "/additional-services"
+                              ? "text-red-600"
+                              : ""
+                          }
+                        >
+                          Дополнительные услуги
+                        </a>
                       </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      <Link href={"/car-sale"}>
-                        <a>Автовикуп</a>
+                      <Link href={urls.carSale}>
+                        <a
+                          className={
+                            currentUrl === "/car-sale" ? "text-red-600" : ""
+                          }
+                        >
+                          Автовикуп
+                        </a>
                       </Link>
                     </li>
                   </ul>
@@ -245,74 +342,78 @@ export default function NavBar({ triggerToggleForm }) {
                 <div className="min-w-max lg:absolute hover-target">
                   <ul className="border text-base text-gray-700 bg-white px-4">
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Программа лояльности
+                      <Link href={urls.loyaltyProgram}>
+                        <a>Программа лояльности</a>
+                      </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      Faq
+                      <Link href={urls.faq}>
+                        <a>Faq</a>
+                      </Link>
                     </li>
                     <li className="hover:text-red-600 cursor-pointer my-2">
-                      О нас
+                      <Link href={urls.about}>
+                        <a>О нас</a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <Link href={"/news"}>
-                  <a>Новости</a>
+                <Link href={urls.news}>
+                  <a className={currentUrl === "/news" ? "text-red-600" : ""}>
+                    Новости
+                  </a>
                 </Link>
               </li>
               <li className="mb-4 lg:mb-0 hover:text-red-600 transition duration-300">
-                <Link href={"/contacts"}>Контакти</Link>
+                <Link href={urls.contacts}>
+                  <a
+                    className={currentUrl === "/contacts" ? "text-red-600" : ""}
+                  >
+                    Контакти
+                  </a>
+                </Link>
               </li>
             </ul>
           </div>
           <div className="flex items-center">
             <button
-              onClick={triggerToggleForm}
-              className="bg-red-600 text-white text-sm md:text-base rounded-lg px-4 md:px-10 py-2.5 mx-5 
-              hover:bg-red-500 focus:outline-none"
+              onClick={callBackForm.triggerToggleForm}
+              className="bg-red-600 text-white text-sm md:text-base rounded-lg px-4 md:px-10 py-2.5 mx-5 main-button
+              transform hover:scale-110 button transition duration-300"
             >
               Связь
             </button>
             <LocalPicker />
-            <button className="flex lg:hidden hover:text-red-400 ml-5 focus:outline-none">
+            <button
+              className={
+                !hamburgerOnClose
+                  ? "menu pointer-events-none ml-5 block lg:hidden z-10"
+                  : "menu opened pointer-events-none ml-5 block lg:hidden z-10"
+              }
+              aria-label="Main Menu"
+            >
               <svg
-                width="30"
-                height="30"
-                viewBox="0 0 30 30"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+                width="34"
+                height="34"
+                viewBox="0 0 100 100"
+                style={{ stroke: theme[navState].hamburgerColor }}
               >
                 <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M7 10C7 9.44772 7.44772 9 8 9H22C22.5523 9 23 9.44772 23 10C23 10.5523 22.5523 11 22 11H8C7.44772 11 7 10.5523 7 10ZM7 15C7 14.4477 7.44772 14 8 14H22C22.5523 14 23 14.4477 23 15C23 15.5523 22.5523 16 22 16H8C7.44772 16 7 15.5523 7 15ZM8 19C7.44772 19 7 19.4477 7 20C7 20.5523 7.44772 21 8 21H22C22.5523 21 23 20.5523 23 20C23 19.4477 22.5523 19 22 19H8Z"
-                  fill="black"
-                ></path>
-                <mask
-                  id="mask0"
-                  mask-type="alpha"
-                  maskUnits="userSpaceOnUse"
-                  x="7"
-                  y="9"
-                  width="16"
-                  height="12"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M7 10C7 9.44772 7.44772 9 8 9H22C22.5523 9 23 9.44772 23 10C23 10.5523 22.5523 11 22 11H8C7.44772 11 7 10.5523 7 10ZM7 15C7 14.4477 7.44772 14 8 14H22C22.5523 14 23 14.4477 23 15C23 15.5523 22.5523 16 22 16H8C7.44772 16 7 15.5523 7 15ZM8 19C7.44772 19 7 19.4477 7 20C7 20.5523 7.44772 21 8 21H22C22.5523 21 23 20.5523 23 20C23 19.4477 22.5523 19 22 19H8Z"
-                    fill="white"
-                  ></path>
-                </mask>
-                <g mask="url(#mask0)">
-                  <rect width="30" height="30" fill="#2C2738"></rect>
-                </g>
+                  className="line line1"
+                  d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"
+                />
+                <path className="line line2" d="M 20,50 H 80" />
+                <path
+                  className="line line3"
+                  d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"
+                />
               </svg>
             </button>
           </div>
         </div>
-        <MobileBavbar />
+        <MobileNavBar changeHambOnClose={changeHambOnClose} />
       </div>
     </nav>
   );

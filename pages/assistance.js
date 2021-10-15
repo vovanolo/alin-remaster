@@ -1,7 +1,7 @@
 import { MainLayout } from "../components/MainLayout";
-import HeroSection from "../components/section/Assistance/HeroSection";
-import ServicesSection from "../components/section/Assistance/ServicesSection";
-import TextSection from "../components/section/Assistance/TextSection";
+import HeroSection from "../components/sections/Assistance/HeroSection";
+import ServicesSection from "../components/sections/Assistance/ServicesSection";
+import TextSection from "../components/sections/Assistance/TextSection";
 
 export default function assistance() {
   return (
