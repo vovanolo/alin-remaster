@@ -42,7 +42,7 @@ export default function CallbackForm({ triggerToggleForm }) {
           }) => (
             <form onSubmit={handleSubmit} className="form-anim mt-4">
               <h2 className="text-2xl text-gray-700">
-                Оставьте свой номер и мы вам перезвоним!
+                Залишіть свій номер і ми вам перезвонимо!
               </h2>
               <div className="my-4">
                 <input
